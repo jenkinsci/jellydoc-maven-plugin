@@ -11,6 +11,7 @@ import java.net.URL;
 import java.util.List;
 
 /**
+ * Generates a Maven report from <tt>taglib.xml</tt>
  * @author Kohsuke Kawaguchi
  */
 public class ReferenceRenderer extends AbstractMavenReportRenderer {
@@ -75,11 +76,15 @@ public class ReferenceRenderer extends AbstractMavenReportRenderer {
     }
 
     private void renderAttribute(Element att) {
+        String name = att.attributeValue("name");
+        if(name.equals("trim") || name.equals("escapeText"))
+            return; // defined in TagSupport.
+
         sink.tableRow();
         String suffix="";
         if(att.attributeValue("use","optional").equals("required"))
                 suffix=" (required)";
-        tableCell(att.attributeValue("name")+suffix);
+        tableCell(name +suffix);
         tableCell(att.attributeValue("type"));
         docCell(att);
         sink.tableRow_();
