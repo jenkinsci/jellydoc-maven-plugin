@@ -19,4 +19,5 @@ do
 done
 # this file created by core
 mv $base/schemas/..xsd $base/schemas/core.xsd
+rm jelly-schemas.zip || true
 zip jelly-schemas.zip schemas/*.xsd
