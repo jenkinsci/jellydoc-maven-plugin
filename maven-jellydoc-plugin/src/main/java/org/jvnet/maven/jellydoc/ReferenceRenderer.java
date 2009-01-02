@@ -9,6 +9,9 @@ import org.codehaus.doxia.sink.Sink;
 
 import java.net.URL;
 import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Arrays;
 
 /**
  * Generates a Maven report from <tt>taglib.xml</tt>
@@ -62,12 +65,23 @@ public class ReferenceRenderer extends AbstractMavenReportRenderer {
         startSection(name);
         doc(tag);
 
-        startTable();
-        tableHeader(new String[]{"Attribute Name","Type","Description"});
-        for( Element att : (List<Element>)tag.elements("attribute"))
-            renderAttribute(att);
-        endTable();
+        if(hasVisibleAttributes(tag)) {
+            startTable();
+            tableHeader(new String[]{"Attribute Name","Type","Description"});
+            for( Element att : (List<Element>)tag.elements("attribute"))
+                renderAttribute(att);
+            endTable();
+        }
         endSection();
+    }
+
+    private boolean hasVisibleAttributes(Element tag) {
+        for( Element att : (List<Element>)tag.elements("attribute")) {
+            String name = att.attributeValue("name");
+            if(!HIDDEN_ATTRIBUTES.contains(name))
+                return true; 
+        }
+        return false;
     }
 
     private void anchor(String name) {
@@ -77,7 +91,7 @@ public class ReferenceRenderer extends AbstractMavenReportRenderer {
 
     private void renderAttribute(Element att) {
         String name = att.attributeValue("name");
-        if(name.equals("trim") || name.equals("escapeText"))
+        if(HIDDEN_ATTRIBUTES.contains(name))
             return; // defined in TagSupport.
 
         sink.tableRow();
@@ -112,4 +126,6 @@ public class ReferenceRenderer extends AbstractMavenReportRenderer {
         doc.content().removeAll(doc.elements("authortag"));
         return doc.asXML();
     }
+
+    private static final Set<String> HIDDEN_ATTRIBUTES = new HashSet<String>(Arrays.asList("escapeText","trim"));
 }
