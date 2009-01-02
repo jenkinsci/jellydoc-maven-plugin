@@ -66,5 +66,7 @@ Schema for official Jelly tag libraries
   For your convenience, I've run this tool on
   {{{http://commons.apache.org/jelly/libs/index.html}the official Jelly tag libraries}}
   maintained at Apache and generated schemas.
-
   {{{jelly-schemas.zip}They can be downloaded from here}}.
+
+  These schemas can be then loaded into your IDE to enable schema-guided editing of those
+  tags.
