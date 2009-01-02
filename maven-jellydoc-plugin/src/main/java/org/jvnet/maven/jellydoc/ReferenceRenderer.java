@@ -30,7 +30,9 @@ public class ReferenceRenderer extends AbstractMavenReportRenderer {
     }
 
     protected void renderBody() {
-        paragraph("The following Jelly tag libraries are defined in this project");
+        paragraph("The following Jelly tag libraries are defined in this project.");
+        paragraphHtml("This information is <a href='taglib.xsd'>also available as an XML Schema</a>");
+
         for( Element library : (List<Element>)taglibXml.getRootElement().elements("library")) {
             String prefix = library.attributeValue("prefix");
 
@@ -42,6 +44,12 @@ public class ReferenceRenderer extends AbstractMavenReportRenderer {
 
             endSection();
         }
+    }
+
+    private void paragraphHtml(String rawText) {
+        sink.paragraph();
+        sink.rawText(rawText);
+        sink.paragraph_();
     }
 
     private void renderSummaryTable(Element library, String prefix) {
