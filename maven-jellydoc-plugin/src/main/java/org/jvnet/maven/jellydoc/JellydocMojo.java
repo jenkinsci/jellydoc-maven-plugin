@@ -8,13 +8,18 @@ import org.apache.maven.artifact.resolver.ArtifactResolver;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.plugin.AbstractMojoExecutionException;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.project.MavenProjectHelper;
+import org.apache.maven.reporting.MavenReport;
+import org.apache.maven.reporting.MavenReportException;
 import org.apache.tools.ant.DefaultLogger;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.taskdefs.Javadoc;
 import org.apache.tools.ant.types.FileSet;
 import org.apache.tools.ant.types.Path;
+import org.codehaus.doxia.sink.Sink;
+import org.dom4j.DocumentException;
 
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.Templates;
@@ -23,6 +28,9 @@ import javax.xml.transform.stream.StreamSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.util.List;
+import java.util.Locale;
+import java.util.Collection;
+import java.net.MalformedURLException;
 
 /**
  * Generates jellydoc XML and other artifacts from there.
@@ -32,7 +40,7 @@ import java.util.List;
  * @phase generate-sources
  * @requiresDependencyResolution compile
  */
-public class JellydocMojo extends AbstractMojo {
+public class JellydocMojo extends AbstractMojo implements MavenReport {
     /**
      * The Maven Project Object
      *
@@ -41,15 +49,6 @@ public class JellydocMojo extends AbstractMojo {
      * @readonly
      */
     protected MavenProject project;
-
-    /**
-     * Project classpath.
-     *
-     * @parameter expression="${project.compileClasspathElements}"
-     * @required
-     * @readonly
-     */
-    protected List classpathElements;
 
     /**
      * The plugin dependencies.
@@ -95,6 +94,8 @@ public class JellydocMojo extends AbstractMojo {
      */
     private MavenProjectHelper helper;
 
+    private File outputDirectory;
+
     public void execute() throws MojoExecutionException, MojoFailureException {
         Project p = new Project();
 
@@ -114,17 +115,14 @@ public class JellydocMojo extends AbstractMojo {
             fs.setDir(new File(dir.toString()));
             javadoc.addFileset(fs);
         }
-        javadoc.setClasspath(makePath(p, classpathElements));
-
+        javadoc.setClasspath(makePath(p,(Collection<Artifact>)project.getArtifacts()));
 
         Javadoc.DocletInfo d = javadoc.createDoclet();
         d.setProject(p);
         d.setName(TagXMLDoclet.class.getName());
-        setParam(d, "-d", new File(project.getBasedir(),"target").getAbsolutePath());
+        setParam(d, "-d", targetDir().getAbsolutePath());
 
-        Path docletPath = new Path(p);
-        for (Artifact artifact : pluginArtifacts)
-            docletPath.createPathElement().setLocation(artifact.getFile());
+        Path docletPath = makePath(p, pluginArtifacts);
         try {
             Artifact self = factory.createArtifact("org.jvnet.maven-jellydoc-plugin", "maven-jellydoc-plugin", pluginVersion, null, "maven-plugin");
             resolver.resolve(self,project.getPluginArtifactRepositories(),localRepository);
@@ -154,16 +152,73 @@ public class JellydocMojo extends AbstractMojo {
         }
     }
 
+    private Path makePath(Project p, Collection<Artifact> artifacts) {
+        Path docletPath = new Path(p);
+        for (Artifact artifact : artifacts)
+            docletPath.createPathElement().setLocation(artifact.getFile());
+        return docletPath;
+    }
+
+    private File targetDir() {
+        return new File(project.getBasedir(),"target");
+    }
+
     private void setParam(Javadoc.DocletInfo d, String name, String value) {
         Javadoc.DocletParam dp = d.createParam();
         dp.setName(name);
         dp.setValue(value);
     }
 
-    private Path makePath(Project p, List list) {
-        Path src = new Path(p);
-        for (Object dir : list)
-            src.createPathElement().setLocation(new File(dir.toString()));
-        return src;
+//    private Path makePath(Project p, List list) {
+//        Path src = new Path(p);
+//        for (Object dir : list)
+//            src.createPathElement().setLocation(new File(dir.toString()));
+//        return src;
+//    }
+
+    public void generate(Sink sink, Locale locale) throws MavenReportException {
+        try {
+            execute();
+            new ReferenceRenderer(sink,new File(targetDir(),"taglib.xml").toURL()).render();
+        } catch (AbstractMojoExecutionException e) {
+            throw new MavenReportException("Failed to generate report",e);
+        } catch (MalformedURLException e) {
+            throw new MavenReportException("Failed to generate report",e);
+        } catch (DocumentException e) {
+            throw new MavenReportException("Failed to generate report",e);
+        }
+    }
+
+    public String getOutputName() {
+        return "jelly-taglib-ref";
+    }
+
+    public String getName(Locale locale) {
+        return "Jelly taglib reference";
+    }
+
+    public String getCategoryName() {
+        return CATEGORY_PROJECT_REPORTS;
+    }
+
+    public String getDescription(Locale locale) {
+        return "Jelly taglib reference";
+    }
+
+    public void setReportOutputDirectory(File outputDirectory) {
+        this.outputDirectory = outputDirectory;
+    }
+
+    public File getReportOutputDirectory() {
+        return this.outputDirectory;
+    }
+
+    public boolean isExternalReport() {
+        return false;
+    }
+
+    public boolean canGenerateReport() {
+        // TODO: check if the current project has any source files
+        return true;
     }
 }
