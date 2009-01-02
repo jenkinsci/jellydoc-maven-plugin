@@ -1,0 +1,62 @@
+                                    ------
+                                    Jelly Taglib Doc Generator
+                                    ------
+                                    ------
+
+  <<<maven-jellydoc-plugin>>> is a Maven2 plugin for generating taglib documentation for {{{http://commons.apache.org/jelly/}Apache Commons Jelly}} from Java source code. In addition, this tool also has the following features:
+  
+  * Generating XML Schema for taglib, which in turn can be used in schema-aware editors
+  
+  * A set of annotations to describe the constraints of tags (such as whether an attribute is required.)
+
+  []
+
+  To use this plugin, typically you configure your POM like this:
+
+-------------------------------
+<reporting>
+  <plugins>
+    <plugin>
+      <groupId>org.jvnet.maven-jellydoc-plugin</groupId>
+      <artifactId>maven-jellydoc-plugin</artifactId>
+    </plugin>
+  </plugins>
+</reporting>
+-------------------------------
+
+  When you run the <<<site>>> goal in Maven, this will render HTML documentation
+  and XML schema, and they will be added to the generated site.
+
+  Alternatively, or in addition, adding the <<<jellydoc>>> goal to the build section
+  will attach XML schema to the artifacts, (thus if you deploy or release,
+  the schema will also gets deployed.)
+
+-------------------------------
+<build>
+  <plugins>
+    <plugin>
+      <groupId>org.jvnet.maven-jellydoc-plugin</groupId>
+      <artifactId>maven-jellydoc-plugin</artifactId>
+      <executions>
+        <execution>
+          <goals>
+            <goal>jellydoc</goal>
+          </goals>
+        </execution>
+      </executions>
+    </plugin>
+  </plugins>
+</build>
+-------------------------------
+
+  This Maven plugin is implemented as a javadoc doclet, and thus
+  it scans your source code and find out all the Jelly tags classes.
+  Documentation will be taken from javadoc.
+
+Quick links
+
+  * {{{maven-jellydoc-plugin/plugin-info.html}Maven Plugin Reference}}
+
+  * {{{nonav/jellydoc-annotations/apidocs/}Annoations javadoc}}
+  
+  []
