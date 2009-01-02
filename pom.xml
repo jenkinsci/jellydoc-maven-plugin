@@ -20,6 +20,10 @@
       <uniqueVersion>false</uniqueVersion>
       <url>java-net:/maven2-repository/trunk/www/repository/</url>
     </repository>
+    <site>
+      <id>jellydoc-www</id>
+      <url>java-net:/maven-jellydoc-plugin/trunk/www/</url>
+    </site>
   </distributionManagement>
 
   <repositories>
