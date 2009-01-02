@@ -2,16 +2,16 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.jvnet.maven-jellydoc-plugin</groupId>
   <artifactId>jellydoc</artifactId>
-  <version>1.1</version>
+  <version>1.2-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Jellydoc</name>
   <url>https://maven-jellydoc-plugin.dev.java.net/</url>
 
   <scm>
-    <connection>scm:svn:https://svn.dev.java.net/svn/maven-jellydoc-plugin/tags/jellydoc-1.1</connection>
-    <developerConnection>scm:svn:https://svn.dev.java.net/svn/maven-jellydoc-plugin/tags/jellydoc-1.1</developerConnection>
-    <url>https://maven-jellydoc-plugin.dev.java.net/source/browse/hudson/tags/jellydoc-1.1</url>
+    <connection>scm:svn:https://svn.dev.java.net/svn/maven-jellydoc-plugin/trunk/jellydoc/</connection>
+    <developerConnection>scm:svn:https://svn.dev.java.net/svn/maven-jellydoc-plugin/trunk/jellydoc/</developerConnection>
+    <url>https://maven-jellydoc-plugin.dev.java.net/source/browse/hudson/trunk/jellydoc</url>
   </scm>
 
   <distributionManagement>
