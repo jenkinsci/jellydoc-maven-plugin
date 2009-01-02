@@ -1,0 +1,74 @@
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.jvnet.maven-jellydoc-plugin</groupId>
+  <artifactId>jellydoc</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>Jellydoc</name>
+  <url>https://maven-jellydoc-plugin.dev.java.net/</url>
+
+  <scm>
+    <connection>scm:svn:https://svn.dev.java.net/svn/maven-jellydoc-plugin/trunk/jellydoc/</connection>
+    <developerConnection>scm:svn:https://svn.dev.java.net/svn/maven-jellydoc-plugin/trunk/jellydoc/</developerConnection>
+    <url>https://maven-jellydoc-plugin.dev.java.net/source/browse/hudson/trunk/jellydoc</url>
+  </scm>
+
+  <distributionManagement>
+    <repository>
+      <id>java.net</id>
+      <uniqueVersion>false</uniqueVersion>
+      <url>java-net:/maven2-repository/trunk/www/repository/</url>
+    </repository>
+  </distributionManagement>
+
+  <repositories>
+    <repository>
+      <id>m.g.o-public</id>
+      <url>http://maven.glassfish.org/content/groups/public/</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>m.g.o-public</id>
+      <url>http://maven.glassfish.org/content/groups/public/</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </pluginRepository>
+  </pluginRepositories>
+
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.5</source>
+          <target>1.5</target>
+        </configuration>
+      </plugin>
+    </plugins>
+    <extensions>
+      <extension>
+        <groupId>org.jvnet.wagon-svn</groupId>
+        <artifactId>wagon-svn</artifactId>
+        <version>1.9</version>
+      </extension>
+    </extensions>
+  </build>
+
+  <modules>
+    <module>maven-jellydoc-plugin</module>
+    <module>annotation</module>
+  </modules>
+</project>
