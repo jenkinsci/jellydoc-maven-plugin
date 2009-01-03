@@ -30,11 +30,27 @@ public class ReferenceRenderer extends AbstractMavenReportRenderer {
     }
 
     protected void renderBody() {
+        List<Element> libraries = (List<Element>) taglibXml.getRootElement().elements("library");
+
         paragraph("The following Jelly tag libraries are defined in this project.");
 
-        for( Element library : (List<Element>)taglibXml.getRootElement().elements("library")) {
+        if(libraries.size()>1) {
+            sink.list();
+            for (Element library : libraries) {
+                sink.listItem();
+                sink.rawText(String.format("<a href='#%s'>%s</a>",
+                        library.attributeValue("prefix"),
+                        library.attributeValue("uri")
+                        ));
+                sink.listItem_();
+            }
+            sink.list_();
+        }
+
+        for( Element library : libraries) {
             String prefix = library.attributeValue("prefix");
 
+            anchor(prefix);
             startSection(library.attributeValue("uri"));
             paragraphHtml("This tag library is <a href='taglib-"+prefix+".xsd'>also available as an XML Schema</a>");
             renderSummaryTable(library,prefix);
