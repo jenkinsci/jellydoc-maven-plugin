@@ -35,16 +35,20 @@ public class ReferenceRenderer extends AbstractMavenReportRenderer {
         paragraph("The following Jelly tag libraries are defined in this project.");
 
         if(libraries.size()>1) {
-            sink.list();
+            startTable();
+            tableHeader(new String[]{"Namespace URI","Description"});
             for (Element library : libraries) {
-                sink.listItem();
+                sink.tableRow();
+                sink.tableCell();
                 sink.rawText(String.format("<a href='#%s'>%s</a>",
                         library.attributeValue("prefix"),
                         library.attributeValue("uri")
                         ));
-                sink.listItem_();
+                sink.tableCell_();
+                docCell(library);
+                sink.tableRow_();
             }
-            sink.list_();
+            endTable();
         }
 
         for( Element library : libraries) {
