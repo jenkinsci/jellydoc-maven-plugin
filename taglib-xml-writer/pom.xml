@@ -1,0 +1,19 @@
+<?xml version="1.0"?><project>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.jvnet.maven-jellydoc-plugin</groupId>
+    <artifactId>jellydoc</artifactId>
+    <version>1.2-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+  <artifactId>taglib-xml-writer</artifactId>
+  <name>taglib-xml-writer</name>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.sun.xml.txw2</groupId>
+      <artifactId>txw2</artifactId>
+      <version>20090102</version>
+    </dependency>
+  </dependencies>
+</project>
