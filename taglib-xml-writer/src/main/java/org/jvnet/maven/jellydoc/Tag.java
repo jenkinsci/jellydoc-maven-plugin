@@ -18,4 +18,7 @@ public interface Tag extends Item {
 
     @XmlElement
     Attribute attribute();
+
+    @XmlElement
+    Body body();
 }

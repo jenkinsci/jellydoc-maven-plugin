@@ -56,6 +56,7 @@ public class ReferenceRenderer extends AbstractMavenReportRenderer {
 
             anchor(prefix);
             startSection(library.attributeValue("uri"));
+            doc(library);
             paragraphHtml("This tag library is <a href='taglib-"+prefix+".xsd'>also available as an XML Schema</a>");
             renderSummaryTable(library,prefix);
 
@@ -99,6 +100,17 @@ public class ReferenceRenderer extends AbstractMavenReportRenderer {
             for( Element att : (List<Element>)tag.elements("attribute"))
                 renderAttribute(att);
             endTable();
+        }
+        // renders description of the body
+        if(tag.attributeValue("no-content","false").equals("true"))
+            paragraph("This tag does not accept any child elements/text.");
+        else {
+            Element body = tag.element("body");
+            if(body!=null) {
+                startSection("body");
+                doc(body);
+                endSection();
+            }
         }
         endSection();
     }
