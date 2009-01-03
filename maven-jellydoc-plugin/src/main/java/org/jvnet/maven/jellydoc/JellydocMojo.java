@@ -21,6 +21,9 @@ import org.apache.tools.ant.types.Path;
 import org.codehaus.doxia.sink.Sink;
 import org.codehaus.plexus.util.FileUtils;
 import org.dom4j.DocumentException;
+import org.dom4j.Element;
+import org.dom4j.io.DocumentSource;
+import org.dom4j.io.SAXReader;
 
 import javax.xml.transform.Templates;
 import javax.xml.transform.TransformerException;
@@ -29,6 +32,8 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import java.io.File;
 import java.io.IOException;
+import java.io.FileOutputStream;
+import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
 import java.util.Collection;
 import java.util.List;
@@ -59,7 +64,7 @@ public class JellydocMojo extends AbstractMojo implements MavenReport {
      * @required
      * @readonly
      */
-    private List<Artifact> pluginArtifacts;
+    protected List<Artifact> pluginArtifacts;
 
     /**
      * Version of this plugin.
@@ -68,33 +73,33 @@ public class JellydocMojo extends AbstractMojo implements MavenReport {
      * @required
      * @readonly
      */
-    private String pluginVersion;
+    protected String pluginVersion;
 
     /**
      * Factory for creating artifact objects
      *
      * @component
      */
-    private ArtifactFactory factory;
+    protected ArtifactFactory factory;
 
     /**
      * Used for resolving artifacts
      *
      * @component
      */
-    private ArtifactResolver resolver;
+    protected ArtifactResolver resolver;
 
     /**
      * The local repository where the artifacts are located.
      *
      * @parameter expression="${localRepository}"
      */
-    private ArtifactRepository localRepository;
+    protected ArtifactRepository localRepository;
 
     /**
      * @component
      */
-    private MavenProjectHelper helper;
+    protected MavenProjectHelper helper;
 
     private File outputDirectory;
 
@@ -139,17 +144,31 @@ public class JellydocMojo extends AbstractMojo implements MavenReport {
 
         javadoc.execute();
 
+        generateSchema();
+    }
+
+    private void generateSchema() throws MojoExecutionException {
         try {
             getLog().info("Generating XML Schema");
             TransformerFactory tf = TransformerFactory.newInstance();
             Templates templates = tf.newTemplates(new StreamSource(getClass().getResourceAsStream("xsdgen.xsl")));
-            File schema = new File(project.getBasedir(), "target/taglib.xsd");
-            templates.newTransformer().transform(
-                new StreamSource(new File(project.getBasedir(),"target/taglib.xml")),
-                new StreamResult(schema));
+            File source = new File(project.getBasedir(), "target/taglib.xml");
+            for(Element lib : (List<Element>)new SAXReader().read(source).selectNodes("/tags/library")) {
+                String prefix = lib.attributeValue("prefix");
 
-            helper.attachArtifact(project,"xsd","taglib",schema);
+                File schema = new File(project.getBasedir(), "target/taglib-"+prefix+".xsd");
+
+                templates.newTransformer().transform(
+                    new DocumentSource(lib),
+                    new StreamResult(new FileOutputStream(schema)));
+
+                helper.attachArtifact(project,"xsd","taglib-"+prefix,schema);
+            }
         } catch (TransformerException e) {
+            throw new MojoExecutionException("Failed to generate schema",e);
+        } catch (DocumentException e) {
+            throw new MojoExecutionException("Failed to generate schema",e);
+        } catch (FileNotFoundException e) {
             throw new MojoExecutionException("Failed to generate schema",e);
         }
     }

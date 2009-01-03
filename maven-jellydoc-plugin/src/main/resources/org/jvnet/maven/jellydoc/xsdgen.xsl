@@ -5,8 +5,11 @@
   <xsl:output method="xml" encoding="UTF-8" indent="yes"/>
 
   <xsl:template match="/">
-    <!-- only handle one for now -->
-    <xsl:apply-templates select="/*/library[1]"/>
+    <xsl:apply-templates select="*"/>
+  </xsl:template>
+
+  <xsl:template match="tags">
+    <xsl:apply-templates />
   </xsl:template>
 
   <xsl:template match="library">
