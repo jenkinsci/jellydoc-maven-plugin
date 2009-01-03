@@ -22,6 +22,7 @@ import org.codehaus.doxia.sink.Sink;
 import org.codehaus.plexus.util.FileUtils;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
+import org.dom4j.tree.DefaultDocument;
 import org.dom4j.io.DocumentSource;
 import org.dom4j.io.SAXReader;
 
@@ -152,15 +153,19 @@ public class JellydocMojo extends AbstractMojo implements MavenReport {
         try {
             getLog().info("Generating XML Schema");
             TransformerFactory tf = TransformerFactory.newInstance();
-            Templates templates = tf.newTemplates(new StreamSource(getClass().getResourceAsStream("xsdgen.xsl")));
+            Templates templates = tf.newTemplates(new StreamSource(JellydocMojo.class.getResource("xsdgen.xsl").toExternalForm()));
             File source = new File(project.getBasedir(), "target/taglib.xml");
             for(Element lib : (List<Element>)new SAXReader().read(source).selectNodes("/tags/library")) {
                 String prefix = lib.attributeValue("prefix");
 
                 File schema = new File(project.getBasedir(), "target/taglib-"+prefix+".xsd");
 
+                lib.getParent().remove(lib); // make it on its own
+                DefaultDocument newDoc = new DefaultDocument();
+                newDoc.setRootElement(lib);
+
                 templates.newTransformer().transform(
-                    new DocumentSource(lib),
+                    new DocumentSource(newDoc),
                     new StreamResult(new FileOutputStream(schema)));
 
                 helper.attachArtifact(project,"xsd","taglib-"+prefix,schema);

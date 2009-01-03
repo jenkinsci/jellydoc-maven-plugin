@@ -5,7 +5,7 @@
   <xsl:output method="xml" encoding="UTF-8" indent="yes"/>
 
   <xsl:template match="/">
-    <xsl:apply-templates select="*"/>
+    <xsl:apply-templates />
   </xsl:template>
 
   <xsl:template match="tags">
