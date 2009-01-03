@@ -55,7 +55,7 @@ public class JellydocMojo extends AbstractMojo implements MavenReport {
      * @required
      * @readonly
      */
-    protected MavenProject project;
+    public MavenProject project;
 
     /**
      * The plugin dependencies.
@@ -64,7 +64,7 @@ public class JellydocMojo extends AbstractMojo implements MavenReport {
      * @required
      * @readonly
      */
-    protected List<Artifact> pluginArtifacts;
+    public List<Artifact> pluginArtifacts;
 
     /**
      * Version of this plugin.
@@ -73,33 +73,33 @@ public class JellydocMojo extends AbstractMojo implements MavenReport {
      * @required
      * @readonly
      */
-    protected String pluginVersion;
+    public String pluginVersion;
 
     /**
      * Factory for creating artifact objects
      *
      * @component
      */
-    protected ArtifactFactory factory;
+    public ArtifactFactory factory;
 
     /**
      * Used for resolving artifacts
      *
      * @component
      */
-    protected ArtifactResolver resolver;
+    public ArtifactResolver resolver;
 
     /**
      * The local repository where the artifacts are located.
      *
      * @parameter expression="${localRepository}"
      */
-    protected ArtifactRepository localRepository;
+    public ArtifactRepository localRepository;
 
     /**
      * @component
      */
-    protected MavenProjectHelper helper;
+    public MavenProjectHelper helper;
 
     private File outputDirectory;
 
@@ -147,7 +147,7 @@ public class JellydocMojo extends AbstractMojo implements MavenReport {
         generateSchema();
     }
 
-    private void generateSchema() throws MojoExecutionException {
+    public void generateSchema() throws MojoExecutionException {
         try {
             getLog().info("Generating XML Schema");
             TransformerFactory tf = TransformerFactory.newInstance();
