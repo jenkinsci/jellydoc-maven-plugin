@@ -47,6 +47,7 @@ import java.util.Locale;
  * @phase generate-sources
  * @requiresDependencyResolution compile
  */
+@SuppressWarnings({"unchecked"})
 public class JellydocMojo extends AbstractMojo implements MavenReport {
     /**
      * The Maven Project Object
@@ -200,10 +201,8 @@ public class JellydocMojo extends AbstractMojo implements MavenReport {
     public void generate(Sink sink, Locale locale) throws MavenReportException {
         try {
             execute();
-            new ReferenceRenderer(sink,new File(targetDir(),"taglib.xml").toURL()).render();
-            FileUtils.copyFile(
-                    new File(targetDir(),"taglib.xsd"),
-                    new File(targetDir(),"site/taglib.xsd"));
+            new ReferenceRenderer(sink,new File(targetDir(),"taglib.xml").toURI().toURL()).render();
+            FileUtils.copyDirectory(targetDir(),new File(targetDir(),"site"),"taglib-*.xsd",null);
         } catch (AbstractMojoExecutionException e) {
             throw new MavenReportException("Failed to generate report",e);
         } catch (MalformedURLException e) {

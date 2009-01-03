@@ -31,12 +31,12 @@ public class ReferenceRenderer extends AbstractMavenReportRenderer {
 
     protected void renderBody() {
         paragraph("The following Jelly tag libraries are defined in this project.");
-        paragraphHtml("This information is <a href='taglib.xsd'>also available as an XML Schema</a>");
 
         for( Element library : (List<Element>)taglibXml.getRootElement().elements("library")) {
             String prefix = library.attributeValue("prefix");
 
             startSection(library.attributeValue("uri"));
+            paragraphHtml("This tag library is <a href='taglib-"+prefix+".xsd'>also available as an XML Schema</a>");
             renderSummaryTable(library,prefix);
 
             for( Element tag : (List<Element>)library.elements("tag"))
