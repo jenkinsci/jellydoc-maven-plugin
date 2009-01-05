@@ -15,9 +15,12 @@ do
   lib=$(basename $(dirname $(dirname $xml)))
   echo $lib
   echo $xml
-  xmlstarlet tr $xsl $xml | xmlstarlet fo > $base/schemas/$lib.xsd
+  if [ "$lib" != "jface" ]; then
+    xmlstarlet tr $xsl $xml | xmlstarlet fo > $base/schemas/$lib.xsd
+  fi
 done
 # this file created by core
 mv $base/schemas/..xsd $base/schemas/core.xsd
+cd $base
 rm jelly-schemas.zip || true
 zip jelly-schemas.zip schemas/*.xsd
