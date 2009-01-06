@@ -14,7 +14,8 @@ import java.util.HashSet;
 import java.util.Arrays;
 
 /**
- * Generates a Maven report from <tt>taglib.xml</tt>
+ * Generates a Maven report from <tt>taglib.xml</tt>.
+ *
  * @author Kohsuke Kawaguchi
  */
 public class ReferenceRenderer extends AbstractMavenReportRenderer {
@@ -88,6 +89,9 @@ public class ReferenceRenderer extends AbstractMavenReportRenderer {
         endTable();
     }
 
+    /**
+     * Generates a documentation for one tag.
+     */
     private void renderTagReference(String taglibPrefix,Element tag) {
         String name = tag.attributeValue("name");
         anchor(taglibPrefix +':'+ name);
@@ -129,6 +133,9 @@ public class ReferenceRenderer extends AbstractMavenReportRenderer {
         sink.anchor_();
     }
 
+    /**
+     * Generates a documentation for one attribute.
+     */
     private void renderAttribute(Element att) {
         String name = att.attributeValue("name");
         if(HIDDEN_ATTRIBUTES.contains(name))
@@ -137,7 +144,9 @@ public class ReferenceRenderer extends AbstractMavenReportRenderer {
         sink.tableRow();
         String suffix="";
         if(att.attributeValue("use","optional").equals("required"))
-                suffix=" (required)";
+            suffix+=" (required)";
+        if(att.attributeValue("deprecated","false").equals("true"))
+            suffix+=" (deprecated)";
         tableCell(name +suffix);
         tableCell(att.attributeValue("type"));
         docCell(att);
