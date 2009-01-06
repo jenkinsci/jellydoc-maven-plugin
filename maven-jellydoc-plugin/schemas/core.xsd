@@ -12,21 +12,21 @@
         <versiontag>$Revision: 480454 $</versiontag>
       </xsd:documentation>
     </xsd:annotation>
-    <xsd:complexType>
+    <xsd:complexType mixed="true">
       <xsd:sequence>
         <xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
       </xsd:sequence>
-      <xsd:attribute name="trim" use="optional">
+      <xsd:attribute name="trim">
         <xsd:annotation>
           <xsd:documentation>Sets whether whitespace inside this tag should be trimmed or not.Defaults to true so whitespace is trimmed</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="tagLib" use="optional">
+      <xsd:attribute name="tagLib">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="escapeText" use="optional">
+      <xsd:attribute name="escapeText">
         <xsd:annotation>
           <xsd:documentation>Sets whether the body of the tag should be escaped as text (so that &lt;and &gt;areescaped as &amp;lt; and &amp;gt;), which is the default or leave the text as XML.</xsd:documentation>
         </xsd:annotation>
@@ -40,11 +40,11 @@
         <versiontag>$Revision: 718134 $</versiontag>
       </xsd:documentation>
     </xsd:annotation>
-    <xsd:complexType>
+    <xsd:complexType mixed="true">
       <xsd:sequence>
         <xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
       </xsd:sequence>
-      <xsd:attribute name="test" use="optional">
+      <xsd:attribute name="test">
         <xsd:annotation>
           <xsd:documentation>Sets the Jelly expression to evaluate (optional).If this is
           <code>null</code>or evaluates to
@@ -53,24 +53,24 @@
         </xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="var" use="optional">
+      <xsd:attribute name="var">
         <xsd:annotation>
           <xsd:documentation>Sets the variable name to export indicating if the item was broken
           <paramtag>var name of the variable to be exported</paramtag>
         </xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="trim" use="optional">
+      <xsd:attribute name="trim">
         <xsd:annotation>
           <xsd:documentation>Sets whether whitespace inside this tag should be trimmed or not.Defaults to true so whitespace is trimmed</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="tagLib" use="optional">
+      <xsd:attribute name="tagLib">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="escapeText" use="optional">
+      <xsd:attribute name="escapeText">
         <xsd:annotation>
           <xsd:documentation>Sets whether the body of the tag should be escaped as text (so that &lt;and &gt;areescaped as &amp;lt; and &amp;gt;), which is the default or leave the text as XML.</xsd:documentation>
         </xsd:annotation>
@@ -84,56 +84,56 @@
         <versiontag>$Revision: 480454 $</versiontag>
       </xsd:documentation>
     </xsd:annotation>
-    <xsd:complexType>
+    <xsd:complexType mixed="true">
       <xsd:sequence>
         <xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
       </xsd:sequence>
-      <xsd:attribute name="var" use="optional">
+      <xsd:attribute name="var">
         <xsd:annotation>
           <xsd:documentation>Sets the variable name to define for this expression</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="scope" use="optional">
+      <xsd:attribute name="scope">
         <xsd:annotation>
           <xsd:documentation>Sets the variable scope for this variable. For example setting this value to 'parent' willset this value in the parent scope. When Jelly is run from inside a Servlet environmentthen other scopes will be available such as 'request', 'session' or 'application'.Other applications may implement their own custom scopes.</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="value" use="optional">
+      <xsd:attribute name="value">
         <xsd:annotation>
           <xsd:documentation>Sets the expression to evaluate.</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="defaultValue" use="optional">
+      <xsd:attribute name="defaultValue">
         <xsd:annotation>
           <xsd:documentation>Sets the default value to be used if the value exprsesion resultsin a null value or blank String</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="target" use="optional">
+      <xsd:attribute name="target">
         <xsd:annotation>
           <xsd:documentation>Sets the target object on which to set a property.</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="property" use="optional">
+      <xsd:attribute name="property">
         <xsd:annotation>
           <xsd:documentation>Sets the name of the property to set on the target object.</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="encode" use="optional">
+      <xsd:attribute name="encode">
         <xsd:annotation>
           <xsd:documentation>Sets whether the body of the tag should be XML encoded as text (so that &lt;and &gt;areencoded as &amp;lt; and &amp;gt;) or leave the text as XML which is the default.This is only used if this tag is specified with no value so that the text body of thistag is used as the body.</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="trim" use="optional">
+      <xsd:attribute name="trim">
         <xsd:annotation>
           <xsd:documentation>Sets whether whitespace inside this tag should be trimmed or not.Defaults to true so whitespace is trimmed</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="tagLib" use="optional">
+      <xsd:attribute name="tagLib">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="escapeText" use="optional">
+      <xsd:attribute name="escapeText">
         <xsd:annotation>
           <xsd:documentation>Sets whether the body of the tag should be escaped as text (so that &lt;and &gt;areescaped as &amp;lt; and &amp;gt;), which is the default or leave the text as XML.</xsd:documentation>
         </xsd:annotation>
@@ -147,41 +147,41 @@
         <versiontag>$Revision: 480454 $</versiontag>
       </xsd:documentation>
     </xsd:annotation>
-    <xsd:complexType>
+    <xsd:complexType mixed="true">
       <xsd:sequence>
         <xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
       </xsd:sequence>
-      <xsd:attribute name="var" use="optional">
+      <xsd:attribute name="var">
         <xsd:annotation>
           <xsd:documentation>Sets the name of the variable exported by this tag</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="exceptionVar" use="optional">
+      <xsd:attribute name="exceptionVar">
         <xsd:annotation>
           <xsd:documentation>Sets the name of a variable that exports the exception thrown bythe method's invocation (if any)</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="method" use="optional">
+      <xsd:attribute name="method">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="on" use="optional">
+      <xsd:attribute name="on">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="trim" use="optional">
+      <xsd:attribute name="trim">
         <xsd:annotation>
           <xsd:documentation>Sets whether whitespace inside this tag should be trimmed or not.Defaults to true so whitespace is trimmed</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="tagLib" use="optional">
+      <xsd:attribute name="tagLib">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="escapeText" use="optional">
+      <xsd:attribute name="escapeText">
         <xsd:annotation>
           <xsd:documentation>Sets whether the body of the tag should be escaped as text (so that &lt;and &gt;areescaped as &amp;lt; and &amp;gt;), which is the default or leave the text as XML.</xsd:documentation>
         </xsd:annotation>
@@ -195,26 +195,26 @@
         <versiontag>$Revision: 480454 $</versiontag>
       </xsd:documentation>
     </xsd:annotation>
-    <xsd:complexType>
+    <xsd:complexType mixed="true">
       <xsd:sequence>
         <xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
       </xsd:sequence>
-      <xsd:attribute name="test" use="optional">
+      <xsd:attribute name="test">
         <xsd:annotation>
           <xsd:documentation>Sets the expression to evaluate.</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="trim" use="optional">
+      <xsd:attribute name="trim">
         <xsd:annotation>
           <xsd:documentation>Sets whether whitespace inside this tag should be trimmed or not.Defaults to true so whitespace is trimmed</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="tagLib" use="optional">
+      <xsd:attribute name="tagLib">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="escapeText" use="optional">
+      <xsd:attribute name="escapeText">
         <xsd:annotation>
           <xsd:documentation>Sets whether the body of the tag should be escaped as text (so that &lt;and &gt;areescaped as &amp;lt; and &amp;gt;), which is the default or leave the text as XML.</xsd:documentation>
         </xsd:annotation>
@@ -228,41 +228,41 @@
         <versiontag>$Revision: 480454 $</versiontag>
       </xsd:documentation>
     </xsd:annotation>
-    <xsd:complexType>
+    <xsd:complexType mixed="true">
       <xsd:sequence>
         <xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
       </xsd:sequence>
-      <xsd:attribute name="inherit" use="optional">
+      <xsd:attribute name="inherit">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="export" use="optional">
+      <xsd:attribute name="export">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="file" use="optional">
+      <xsd:attribute name="file">
         <xsd:annotation>
           <xsd:documentation>Sets the file to be included which is either an absolute file or a filerelative to the current directory</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="uri" use="optional">
+      <xsd:attribute name="uri">
         <xsd:annotation>
           <xsd:documentation>Sets the URI (relative URI or absolute URL) for the script to evaluate.</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="trim" use="optional">
+      <xsd:attribute name="trim">
         <xsd:annotation>
           <xsd:documentation>Sets whether whitespace inside this tag should be trimmed or not.Defaults to true so whitespace is trimmed</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="tagLib" use="optional">
+      <xsd:attribute name="tagLib">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="escapeText" use="optional">
+      <xsd:attribute name="escapeText">
         <xsd:annotation>
           <xsd:documentation>Sets whether the body of the tag should be escaped as text (so that &lt;and &gt;areescaped as &amp;lt; and &amp;gt;), which is the default or leave the text as XML.</xsd:documentation>
         </xsd:annotation>
@@ -275,58 +275,58 @@
         <authortag>&lt;a href="mailto:vinayc@apache.org"&gt;Vinay Chandran&lt;/a&gt;</authortag>
       </xsd:documentation>
     </xsd:annotation>
-    <xsd:complexType>
+    <xsd:complexType mixed="true">
       <xsd:sequence>
         <xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
       </xsd:sequence>
-      <xsd:attribute name="name" use="optional">
+      <xsd:attribute name="name">
         <xsd:annotation>
           <xsd:documentation>Sets the file name for the output</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="omitXmlDeclaration" use="optional">
+      <xsd:attribute name="omitXmlDeclaration">
         <xsd:annotation>
           <xsd:documentation>Sets whether the XML declaration should be output or not</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="outputMode" use="optional">
+      <xsd:attribute name="outputMode">
         <xsd:annotation>
           <xsd:documentation>Sets the output mode, whether XML or HTML</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="prettyPrint" use="optional">
+      <xsd:attribute name="prettyPrint">
         <xsd:annotation>
           <xsd:documentation>Sets whether pretty printing mode is turned on. The default is off so that whitespace is preserved</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="encoding" use="optional">
+      <xsd:attribute name="encoding">
         <xsd:annotation>
           <xsd:documentation>Sets the XML encoding mode, which defaults to UTF-8</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="append" use="optional">
+      <xsd:attribute name="append">
         <xsd:annotation>
           <xsd:documentation>Sets wether to append at the end of the file(not really something you normally do with an XML file).</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="var" use="optional">
+      <xsd:attribute name="var">
         <xsd:annotation>
           <xsd:documentation>Sets the var.
           <paramtag>var The var to set</paramtag>
         </xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="trim" use="optional">
+      <xsd:attribute name="trim">
         <xsd:annotation>
           <xsd:documentation>Sets whether whitespace inside this tag should be trimmed or not.Defaults to true so whitespace is trimmed</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="tagLib" use="optional">
+      <xsd:attribute name="tagLib">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="escapeText" use="optional">
+      <xsd:attribute name="escapeText">
         <xsd:annotation>
           <xsd:documentation>Sets whether the body of the tag should be escaped as text (so that &lt;and &gt;areescaped as &amp;lt; and &amp;gt;), which is the default or leave the text as XML.</xsd:documentation>
         </xsd:annotation>
@@ -340,21 +340,21 @@
         <versiontag>$Revision: 480454 $</versiontag>
       </xsd:documentation>
     </xsd:annotation>
-    <xsd:complexType>
+    <xsd:complexType mixed="true">
       <xsd:sequence>
         <xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
       </xsd:sequence>
-      <xsd:attribute name="trim" use="optional">
+      <xsd:attribute name="trim">
         <xsd:annotation>
           <xsd:documentation>Sets whether whitespace inside this tag should be trimmed or not.Defaults to true so whitespace is trimmed</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="tagLib" use="optional">
+      <xsd:attribute name="tagLib">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="escapeText" use="optional">
+      <xsd:attribute name="escapeText">
         <xsd:annotation>
           <xsd:documentation>Sets whether the body of the tag should be escaped as text (so that &lt;and &gt;areescaped as &amp;lt; and &amp;gt;), which is the default or leave the text as XML.</xsd:documentation>
         </xsd:annotation>
@@ -369,28 +369,28 @@
         <versiontag>$Revision: 480454 $</versiontag>
       </xsd:documentation>
     </xsd:annotation>
-    <xsd:complexType>
+    <xsd:complexType mixed="true">
       <xsd:sequence>
         <xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
       </xsd:sequence>
-      <xsd:attribute name="test" use="optional">
+      <xsd:attribute name="test">
         <xsd:annotation>
           <xsd:documentation>Setter for the expression
           <paramtag>e the expression to test</paramtag>
         </xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="trim" use="optional">
+      <xsd:attribute name="trim">
         <xsd:annotation>
           <xsd:documentation>Sets whether whitespace inside this tag should be trimmed or not.Defaults to true so whitespace is trimmed</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="tagLib" use="optional">
+      <xsd:attribute name="tagLib">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="escapeText" use="optional">
+      <xsd:attribute name="escapeText">
         <xsd:annotation>
           <xsd:documentation>Sets whether the body of the tag should be escaped as text (so that &lt;and &gt;areescaped as &amp;lt; and &amp;gt;), which is the default or leave the text as XML.</xsd:documentation>
         </xsd:annotation>
@@ -404,28 +404,28 @@
         <versiontag>$Revision: 480454 $</versiontag>
       </xsd:documentation>
     </xsd:annotation>
-    <xsd:complexType>
+    <xsd:complexType mixed="true">
       <xsd:sequence>
         <xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
       </xsd:sequence>
-      <xsd:attribute name="ignoreUnknownProperties" use="optional">
+      <xsd:attribute name="ignoreUnknownProperties">
         <xsd:annotation>
           <xsd:documentation>If this tag finds an attribute in the XML that's notignored by org.apache.commons.jelly.tags.core.UseBeanTag.ignorePropertiesand isn't abean property, should it throw an exception?
           <paramtag>ignoreUnknownProperties Sets {@link #ignoreUnknownProperties}.</paramtag>
         </xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="trim" use="optional">
+      <xsd:attribute name="trim">
         <xsd:annotation>
           <xsd:documentation>Sets whether whitespace inside this tag should be trimmed or not.Defaults to true so whitespace is trimmed</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="tagLib" use="optional">
+      <xsd:attribute name="tagLib">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="escapeText" use="optional">
+      <xsd:attribute name="escapeText">
         <xsd:annotation>
           <xsd:documentation>Sets whether the body of the tag should be escaped as text (so that &lt;and &gt;areescaped as &amp;lt; and &amp;gt;), which is the default or leave the text as XML.</xsd:documentation>
         </xsd:annotation>
@@ -441,42 +441,42 @@
         <versiontag>$Revision: 480454 $</versiontag>
       </xsd:documentation>
     </xsd:annotation>
-    <xsd:complexType>
+    <xsd:complexType mixed="true">
       <xsd:sequence>
         <xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
       </xsd:sequence>
-      <xsd:attribute name="var" use="optional">
+      <xsd:attribute name="var">
         <xsd:annotation>
           <xsd:documentation>Sets the name of the variable exported by this tag.
           <paramtag>var The variable name.</paramtag>
         </xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="field" use="optional">
+      <xsd:attribute name="field">
         <xsd:annotation>
           <xsd:documentation>Sets the name of the field to retrieve.
           <paramtag>method The method name</paramtag>
         </xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="className" use="optional">
+      <xsd:attribute name="className">
         <xsd:annotation>
           <xsd:documentation>Sets the fully qualified name of the class containing the static field.
           <paramtag>className The name of the class.</paramtag>
         </xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="trim" use="optional">
+      <xsd:attribute name="trim">
         <xsd:annotation>
           <xsd:documentation>Sets whether whitespace inside this tag should be trimmed or not.Defaults to true so whitespace is trimmed</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="tagLib" use="optional">
+      <xsd:attribute name="tagLib">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="escapeText" use="optional">
+      <xsd:attribute name="escapeText">
         <xsd:annotation>
           <xsd:documentation>Sets whether the body of the tag should be escaped as text (so that &lt;and &gt;areescaped as &amp;lt; and &amp;gt;), which is the default or leave the text as XML.</xsd:documentation>
         </xsd:annotation>
@@ -490,21 +490,21 @@
         <versiontag>$Revision: 480454 $</versiontag>
       </xsd:documentation>
     </xsd:annotation>
-    <xsd:complexType>
+    <xsd:complexType mixed="true">
       <xsd:sequence>
         <xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
       </xsd:sequence>
-      <xsd:attribute name="trim" use="optional">
+      <xsd:attribute name="trim">
         <xsd:annotation>
           <xsd:documentation>Sets whether whitespace inside this tag should be trimmed or not.Defaults to true so whitespace is trimmed</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="tagLib" use="optional">
+      <xsd:attribute name="tagLib">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="escapeText" use="optional">
+      <xsd:attribute name="escapeText">
         <xsd:annotation>
           <xsd:documentation>Sets whether the body of the tag should be escaped as text (so that &lt;and &gt;areescaped as &amp;lt; and &amp;gt;), which is the default or leave the text as XML.</xsd:documentation>
         </xsd:annotation>
@@ -518,21 +518,21 @@
         <versiontag>$Revision: 480454 $</versiontag>
       </xsd:documentation>
     </xsd:annotation>
-    <xsd:complexType>
+    <xsd:complexType mixed="true">
       <xsd:sequence>
         <xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
       </xsd:sequence>
-      <xsd:attribute name="trim" use="optional">
+      <xsd:attribute name="trim">
         <xsd:annotation>
           <xsd:documentation>Sets whether whitespace inside this tag should be trimmed or not.Defaults to true so whitespace is trimmed</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="tagLib" use="optional">
+      <xsd:attribute name="tagLib">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="escapeText" use="optional">
+      <xsd:attribute name="escapeText">
         <xsd:annotation>
           <xsd:documentation>Sets whether the body of the tag should be escaped as text (so that &lt;and &gt;areescaped as &amp;lt; and &amp;gt;), which is the default or leave the text as XML.</xsd:documentation>
         </xsd:annotation>
@@ -546,11 +546,11 @@
         <versiontag>$Revision: 712845 $</versiontag>
       </xsd:documentation>
     </xsd:annotation>
-    <xsd:complexType>
+    <xsd:complexType mixed="true">
       <xsd:sequence>
         <xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
       </xsd:sequence>
-      <xsd:attribute name="type" use="optional">
+      <xsd:attribute name="type">
         <xsd:annotation>
           <xsd:documentation>The name of the argument class or type, if any.This may be a fully specified class name ora primitive type name(
           <code>boolean
@@ -562,19 +562,19 @@
         </xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="value" use="optional">
+      <xsd:attribute name="value">
         <xsd:annotation>
           <xsd:documentation>The (possibly null) value of this argument.</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="classLoader" use="optional">
+      <xsd:attribute name="classLoader">
         <xsd:annotation>
           <xsd:documentation>Set the class loader to be used for instantiating application objectswhen required.
           <paramtag>classLoader The new class loader to use, or &lt;code&gt;null&lt;/code&gt; to revert to the standard rules</paramtag>
         </xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="useContextClassLoader" use="optional">
+      <xsd:attribute name="useContextClassLoader">
         <xsd:annotation>
           <xsd:documentation>Determine whether to use the Context ClassLoader (the one found bycalling
           <code>Thread.currentThread().getContextClassLoader()</code>)to resolve/load classes. If notusing Context ClassLoader, then the class-loading defaults tousing the calling-class' ClassLoader.
@@ -582,17 +582,17 @@
         </xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="trim" use="optional">
+      <xsd:attribute name="trim">
         <xsd:annotation>
           <xsd:documentation>Sets whether whitespace inside this tag should be trimmed or not.Defaults to true so whitespace is trimmed</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="tagLib" use="optional">
+      <xsd:attribute name="tagLib">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="escapeText" use="optional">
+      <xsd:attribute name="escapeText">
         <xsd:annotation>
           <xsd:documentation>Sets whether the body of the tag should be escaped as text (so that &lt;and &gt;areescaped as &amp;lt; and &amp;gt;), which is the default or leave the text as XML.</xsd:documentation>
         </xsd:annotation>
@@ -608,28 +608,28 @@
         <versiontag>$Revision: 480454 $ $Date: 2006-11-28 23:48:51 -0800 (Tue, 28 Nov 2006) $</versiontag>
       </xsd:documentation>
     </xsd:annotation>
-    <xsd:complexType>
+    <xsd:complexType mixed="true">
       <xsd:sequence>
         <xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
       </xsd:sequence>
-      <xsd:attribute name="on" use="optional">
+      <xsd:attribute name="on">
         <xsd:annotation>
           <xsd:documentation>Sets the value to switch on.Note that the org.apache.commons.jelly.expression.Expressionis evaluated only once, when the &lt;switch&gt;tag is evaluated.
           <paramtag>on the value to switch on</paramtag>
         </xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="trim" use="optional">
+      <xsd:attribute name="trim">
         <xsd:annotation>
           <xsd:documentation>Sets whether whitespace inside this tag should be trimmed or not.Defaults to true so whitespace is trimmed</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="tagLib" use="optional">
+      <xsd:attribute name="tagLib">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="escapeText" use="optional">
+      <xsd:attribute name="escapeText">
         <xsd:annotation>
           <xsd:documentation>Sets whether the body of the tag should be escaped as text (so that &lt;and &gt;areescaped as &amp;lt; and &amp;gt;), which is the default or leave the text as XML.</xsd:documentation>
         </xsd:annotation>
@@ -644,28 +644,28 @@
         <versiontag>$Revision: 480454 $</versiontag>
       </xsd:documentation>
     </xsd:annotation>
-    <xsd:complexType>
+    <xsd:complexType mixed="true">
       <xsd:sequence>
         <xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
       </xsd:sequence>
-      <xsd:attribute name="ignoreUnknownProperties" use="optional">
+      <xsd:attribute name="ignoreUnknownProperties">
         <xsd:annotation>
           <xsd:documentation>If this tag finds an attribute in the XML that's notignored by org.apache.commons.jelly.tags.core.UseBeanTag.ignorePropertiesand isn't abean property, should it throw an exception?
           <paramtag>ignoreUnknownProperties Sets {@link #ignoreUnknownProperties}.</paramtag>
         </xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="trim" use="optional">
+      <xsd:attribute name="trim">
         <xsd:annotation>
           <xsd:documentation>Sets whether whitespace inside this tag should be trimmed or not.Defaults to true so whitespace is trimmed</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="tagLib" use="optional">
+      <xsd:attribute name="tagLib">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="escapeText" use="optional">
+      <xsd:attribute name="escapeText">
         <xsd:annotation>
           <xsd:documentation>Sets whether the body of the tag should be escaped as text (so that &lt;and &gt;areescaped as &amp;lt; and &amp;gt;), which is the default or leave the text as XML.</xsd:documentation>
         </xsd:annotation>
@@ -679,45 +679,45 @@
         <versiontag>$Revision: 480454 $</versiontag>
       </xsd:documentation>
     </xsd:annotation>
-    <xsd:complexType>
+    <xsd:complexType mixed="true">
       <xsd:sequence>
         <xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
       </xsd:sequence>
-      <xsd:attribute name="var" use="optional">
+      <xsd:attribute name="var">
         <xsd:annotation>
           <xsd:documentation>Sets the variable name that will be used for the Document variable created</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="text" use="optional">
+      <xsd:attribute name="text">
         <xsd:annotation>
           <xsd:documentation>Sets the text to be parsed by this parser
           <paramtag>text The text to be parsed by this parser</paramtag>
         </xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="XMLReader" use="optional">
+      <xsd:attribute name="XMLReader">
         <xsd:annotation>
           <xsd:documentation>Sets the XMLReader used for parsing</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="jellyParser" use="optional">
+      <xsd:attribute name="jellyParser">
         <xsd:annotation>
           <xsd:documentation>Sets the jellyParser.
           <paramtag>jellyParser The jellyParser to set</paramtag>
         </xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="trim" use="optional">
+      <xsd:attribute name="trim">
         <xsd:annotation>
           <xsd:documentation>Sets whether whitespace inside this tag should be trimmed or not.Defaults to true so whitespace is trimmed</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="tagLib" use="optional">
+      <xsd:attribute name="tagLib">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="escapeText" use="optional">
+      <xsd:attribute name="escapeText">
         <xsd:annotation>
           <xsd:documentation>Sets whether the body of the tag should be escaped as text (so that &lt;and &gt;areescaped as &amp;lt; and &amp;gt;), which is the default or leave the text as XML.</xsd:documentation>
         </xsd:annotation>
@@ -731,21 +731,21 @@
         <versiontag>$Revision: 480454 $</versiontag>
       </xsd:documentation>
     </xsd:annotation>
-    <xsd:complexType>
+    <xsd:complexType mixed="true">
       <xsd:sequence>
         <xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
       </xsd:sequence>
-      <xsd:attribute name="trim" use="optional">
+      <xsd:attribute name="trim">
         <xsd:annotation>
           <xsd:documentation>Sets whether whitespace inside this tag should be trimmed or not.Defaults to true so whitespace is trimmed</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="tagLib" use="optional">
+      <xsd:attribute name="tagLib">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="escapeText" use="optional">
+      <xsd:attribute name="escapeText">
         <xsd:annotation>
           <xsd:documentation>Sets whether the body of the tag should be escaped as text (so that &lt;and &gt;areescaped as &amp;lt; and &amp;gt;), which is the default or leave the text as XML.</xsd:documentation>
         </xsd:annotation>
@@ -759,40 +759,40 @@
         <versiontag>$Revision: 718134 $</versiontag>
       </xsd:documentation>
     </xsd:annotation>
-    <xsd:complexType>
+    <xsd:complexType mixed="true">
       <xsd:sequence>
         <xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
       </xsd:sequence>
-      <xsd:attribute name="var" use="optional">
+      <xsd:attribute name="var">
         <xsd:annotation>
           <xsd:documentation>Sets the name of the variable which is exposed with the Exception that getsthrown by evaluating the body of this tag or which is set to null if there isno exception thrown.</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="exceptions" use="optional">
+      <xsd:attribute name="exceptions">
         <xsd:annotation>
           <xsd:documentation>
             <paramtag>exceptions The exceptions to set. Must be separated by ";"</paramtag>
           </xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="cause" use="optional">
+      <xsd:attribute name="cause">
         <xsd:annotation>
           <xsd:documentation>
             <paramtag>cause The cause to set.</paramtag>
           </xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="trim" use="optional">
+      <xsd:attribute name="trim">
         <xsd:annotation>
           <xsd:documentation>Sets whether whitespace inside this tag should be trimmed or not.Defaults to true so whitespace is trimmed</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="tagLib" use="optional">
+      <xsd:attribute name="tagLib">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="escapeText" use="optional">
+      <xsd:attribute name="escapeText">
         <xsd:annotation>
           <xsd:documentation>Sets whether the body of the tag should be escaped as text (so that &lt;and &gt;areescaped as &amp;lt; and &amp;gt;), which is the default or leave the text as XML.</xsd:documentation>
         </xsd:annotation>
@@ -807,26 +807,26 @@
         <versiontag>$Revision: 480454 $ $Date: 2006-11-28 23:48:51 -0800 (Tue, 28 Nov 2006) $</versiontag>
       </xsd:documentation>
     </xsd:annotation>
-    <xsd:complexType>
+    <xsd:complexType mixed="true">
       <xsd:sequence>
         <xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
       </xsd:sequence>
-      <xsd:attribute name="fallThru" use="optional">
+      <xsd:attribute name="fallThru">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="trim" use="optional">
+      <xsd:attribute name="trim">
         <xsd:annotation>
           <xsd:documentation>Sets whether whitespace inside this tag should be trimmed or not.Defaults to true so whitespace is trimmed</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="tagLib" use="optional">
+      <xsd:attribute name="tagLib">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="escapeText" use="optional">
+      <xsd:attribute name="escapeText">
         <xsd:annotation>
           <xsd:documentation>Sets whether the body of the tag should be escaped as text (so that &lt;and &gt;areescaped as &amp;lt; and &amp;gt;), which is the default or leave the text as XML.</xsd:documentation>
         </xsd:annotation>
@@ -840,26 +840,26 @@
         <versiontag>$Revision: 718134 $</versiontag>
       </xsd:documentation>
     </xsd:annotation>
-    <xsd:complexType>
+    <xsd:complexType mixed="true">
       <xsd:sequence>
         <xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
       </xsd:sequence>
-      <xsd:attribute name="var" use="optional">
+      <xsd:attribute name="var">
         <xsd:annotation>
           <xsd:documentation>Sets the name of the variable which will be removed by this tag..</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="trim" use="optional">
+      <xsd:attribute name="trim">
         <xsd:annotation>
           <xsd:documentation>Sets whether whitespace inside this tag should be trimmed or not.Defaults to true so whitespace is trimmed</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="tagLib" use="optional">
+      <xsd:attribute name="tagLib">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="escapeText" use="optional">
+      <xsd:attribute name="escapeText">
         <xsd:annotation>
           <xsd:documentation>Sets whether the body of the tag should be escaped as text (so that &lt;and &gt;areescaped as &amp;lt; and &amp;gt;), which is the default or leave the text as XML.</xsd:documentation>
         </xsd:annotation>
@@ -872,40 +872,40 @@
         <authortag>&lt;a href="mailto:vinayc@apache.org"&gt;Vinay Chandran&lt;/a&gt;</authortag>
       </xsd:documentation>
     </xsd:annotation>
-    <xsd:complexType>
+    <xsd:complexType mixed="true">
       <xsd:sequence>
         <xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
       </xsd:sequence>
-      <xsd:attribute name="name" use="optional">
+      <xsd:attribute name="name">
         <xsd:annotation>
           <xsd:documentation>Sets the name of the thread.
           <paramtag>name The name to set</paramtag>
         </xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="xmlOutput" use="optional">
+      <xsd:attribute name="xmlOutput">
         <xsd:annotation>
           <xsd:documentation>Sets the destination of output</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="file" use="optional">
+      <xsd:attribute name="file">
         <xsd:annotation>
           <xsd:documentation>Set the file which is generated from the output
           <paramtag>name The output file name</paramtag>
         </xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="trim" use="optional">
+      <xsd:attribute name="trim">
         <xsd:annotation>
           <xsd:documentation>Sets whether whitespace inside this tag should be trimmed or not.Defaults to true so whitespace is trimmed</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="tagLib" use="optional">
+      <xsd:attribute name="tagLib">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="escapeText" use="optional">
+      <xsd:attribute name="escapeText">
         <xsd:annotation>
           <xsd:documentation>Sets whether the body of the tag should be escaped as text (so that &lt;and &gt;areescaped as &amp;lt; and &amp;gt;), which is the default or leave the text as XML.</xsd:documentation>
         </xsd:annotation>
@@ -920,31 +920,31 @@
         <versiontag>$Revision: 480454 $ $Date: 2006-11-28 23:48:51 -0800 (Tue, 28 Nov 2006) $</versiontag>
       </xsd:documentation>
     </xsd:annotation>
-    <xsd:complexType>
+    <xsd:complexType mixed="true">
       <xsd:sequence>
         <xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
       </xsd:sequence>
-      <xsd:attribute name="value" use="optional">
+      <xsd:attribute name="value">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="fallThru" use="optional">
+      <xsd:attribute name="fallThru">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="trim" use="optional">
+      <xsd:attribute name="trim">
         <xsd:annotation>
           <xsd:documentation>Sets whether whitespace inside this tag should be trimmed or not.Defaults to true so whitespace is trimmed</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="tagLib" use="optional">
+      <xsd:attribute name="tagLib">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="escapeText" use="optional">
+      <xsd:attribute name="escapeText">
         <xsd:annotation>
           <xsd:documentation>Sets whether the body of the tag should be escaped as text (so that &lt;and &gt;areescaped as &amp;lt; and &amp;gt;), which is the default or leave the text as XML.</xsd:documentation>
         </xsd:annotation>
@@ -959,21 +959,21 @@
         <versiontag>$Revision: 480454 $</versiontag>
       </xsd:documentation>
     </xsd:annotation>
-    <xsd:complexType>
+    <xsd:complexType mixed="true">
       <xsd:sequence>
         <xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
       </xsd:sequence>
-      <xsd:attribute name="trim" use="optional">
+      <xsd:attribute name="trim">
         <xsd:annotation>
           <xsd:documentation>Sets whether whitespace inside this tag should be trimmed or not.Defaults to true so whitespace is trimmed</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="tagLib" use="optional">
+      <xsd:attribute name="tagLib">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="escapeText" use="optional">
+      <xsd:attribute name="escapeText">
         <xsd:annotation>
           <xsd:documentation>Sets whether the body of the tag should be escaped as text (so that &lt;and &gt;areescaped as &amp;lt; and &amp;gt;), which is the default or leave the text as XML.</xsd:documentation>
         </xsd:annotation>
@@ -990,38 +990,38 @@
         <versiontag>$Revision: 480454 $</versiontag>
       </xsd:documentation>
     </xsd:annotation>
-    <xsd:complexType>
+    <xsd:complexType mixed="true">
       <xsd:sequence>
         <xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
       </xsd:sequence>
-      <xsd:attribute name="inherit" use="optional">
+      <xsd:attribute name="inherit">
         <xsd:annotation>
           <xsd:documentation>Sets whether property inheritence is enabled or disabled</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="uri" use="optional">
+      <xsd:attribute name="uri">
         <xsd:annotation>
           <xsd:documentation>Sets the URI (relative URI or absolute URL) for the script to evaluate.</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="file" use="optional">
+      <xsd:attribute name="file">
         <xsd:annotation>
           <xsd:documentation>Sets the file for the script to evaluate.
           <paramtag>file The file to set</paramtag>
         </xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="trim" use="optional">
+      <xsd:attribute name="trim">
         <xsd:annotation>
           <xsd:documentation>Sets whether whitespace inside this tag should be trimmed or not.Defaults to true so whitespace is trimmed</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="tagLib" use="optional">
+      <xsd:attribute name="tagLib">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="escapeText" use="optional">
+      <xsd:attribute name="escapeText">
         <xsd:annotation>
           <xsd:documentation>Sets whether the body of the tag should be escaped as text (so that &lt;and &gt;areescaped as &amp;lt; and &amp;gt;), which is the default or leave the text as XML.</xsd:documentation>
         </xsd:annotation>
@@ -1037,58 +1037,58 @@
         <versiontag>$Revision: 480454 $</versiontag>
       </xsd:documentation>
     </xsd:annotation>
-    <xsd:complexType>
+    <xsd:complexType mixed="true">
       <xsd:sequence>
         <xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
       </xsd:sequence>
-      <xsd:attribute name="items" use="optional">
+      <xsd:attribute name="items">
         <xsd:annotation>
           <xsd:documentation>Sets the expression used to iterate over.This expression could resolve to an Iterator, Collection, Map, Array,Enumeration or comma separated String.</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="var" use="optional">
+      <xsd:attribute name="var">
         <xsd:annotation>
           <xsd:documentation>Sets the variable name to export for the item being iterated over</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="indexVar" use="optional">
+      <xsd:attribute name="indexVar">
         <xsd:annotation>
           <xsd:documentation>Sets the variable name to export the current index counter to</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="begin" use="optional">
+      <xsd:attribute name="begin">
         <xsd:annotation>
           <xsd:documentation>Sets the starting index value</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="end" use="optional">
+      <xsd:attribute name="end">
         <xsd:annotation>
           <xsd:documentation>Sets the ending index value</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="step" use="optional">
+      <xsd:attribute name="step">
         <xsd:annotation>
           <xsd:documentation>Sets the index increment step</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="varStatus" use="optional">
+      <xsd:attribute name="varStatus">
         <xsd:annotation>
           <xsd:documentation>Sets the variable name to export the current status to.The status is an implementation of the JSTL LoopTagStatus interface that providesthe following bean properties:
           <ul><li>current - the current value of the loop items being iterated</li><li>index - the current index of the items being iterated</li><li>first - true if this is the first iteration, false otherwise</li><li>last - true if this is the last iteration, false otherwise</li><li>begin - the starting index of the loop</li><li>step - the stepping value of the loop</li><li>end - the end index of the loop</li></ul>
         </xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="trim" use="optional">
+      <xsd:attribute name="trim">
         <xsd:annotation>
           <xsd:documentation>Sets whether whitespace inside this tag should be trimmed or not.Defaults to true so whitespace is trimmed</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="tagLib" use="optional">
+      <xsd:attribute name="tagLib">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="escapeText" use="optional">
+      <xsd:attribute name="escapeText">
         <xsd:annotation>
           <xsd:documentation>Sets whether the body of the tag should be escaped as text (so that &lt;and &gt;areescaped as &amp;lt; and &amp;gt;), which is the default or leave the text as XML.</xsd:documentation>
         </xsd:annotation>
@@ -1102,28 +1102,28 @@
         <versiontag>$Revision: 480454 $</versiontag>
       </xsd:documentation>
     </xsd:annotation>
-    <xsd:complexType>
+    <xsd:complexType mixed="true">
       <xsd:sequence>
         <xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
       </xsd:sequence>
-      <xsd:attribute name="test" use="optional">
+      <xsd:attribute name="test">
         <xsd:annotation>
           <xsd:documentation>Sets the Jelly expression to evaluate. If this returns true, the body ofthe tag is evaluated
           <paramtag>test the Jelly expression to evaluate</paramtag>
         </xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="trim" use="optional">
+      <xsd:attribute name="trim">
         <xsd:annotation>
           <xsd:documentation>Sets whether whitespace inside this tag should be trimmed or not.Defaults to true so whitespace is trimmed</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="tagLib" use="optional">
+      <xsd:attribute name="tagLib">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="escapeText" use="optional">
+      <xsd:attribute name="escapeText">
         <xsd:annotation>
           <xsd:documentation>Sets whether the body of the tag should be escaped as text (so that &lt;and &gt;areescaped as &amp;lt; and &amp;gt;), which is the default or leave the text as XML.</xsd:documentation>
         </xsd:annotation>
@@ -1138,28 +1138,28 @@
         <versiontag>$Revision: 480454 $</versiontag>
       </xsd:documentation>
     </xsd:annotation>
-    <xsd:complexType>
+    <xsd:complexType mixed="true">
       <xsd:sequence>
         <xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
       </xsd:sequence>
-      <xsd:attribute name="value" use="optional">
+      <xsd:attribute name="value">
         <xsd:annotation>
           <xsd:documentation>Sets the Jexl expression to evaluate.
           <requiredtag>true</requiredtag>
         </xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="trim" use="optional">
+      <xsd:attribute name="trim">
         <xsd:annotation>
           <xsd:documentation>Sets whether whitespace inside this tag should be trimmed or not.Defaults to true so whitespace is trimmed</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="tagLib" use="optional">
+      <xsd:attribute name="tagLib">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="escapeText" use="optional">
+      <xsd:attribute name="escapeText">
         <xsd:annotation>
           <xsd:documentation>Sets whether the body of the tag should be escaped as text (so that &lt;and &gt;areescaped as &amp;lt; and &amp;gt;), which is the default or leave the text as XML.</xsd:documentation>
         </xsd:annotation>
@@ -1178,47 +1178,47 @@
         <versiontag>$Revision: 480454 $</versiontag>
       </xsd:documentation>
     </xsd:annotation>
-    <xsd:complexType>
+    <xsd:complexType mixed="true">
       <xsd:sequence>
         <xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
       </xsd:sequence>
-      <xsd:attribute name="var" use="optional">
+      <xsd:attribute name="var">
         <xsd:annotation>
           <xsd:documentation>Sets the name of the variable exported by this tag
           <paramtag>var The variable name</paramtag>
         </xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="exceptionVar" use="optional">
+      <xsd:attribute name="exceptionVar">
         <xsd:annotation>
           <xsd:documentation>Sets the name of a variable that exports the exception thrown bythe method's invocation (if any)</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="method" use="optional">
+      <xsd:attribute name="method">
         <xsd:annotation>
           <xsd:documentation>Sets the name of the method to invoke
           <paramtag>method The method name</paramtag>
         </xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="className" use="optional">
+      <xsd:attribute name="className">
         <xsd:annotation>
           <xsd:documentation>Sets the fully qualified class name containing the static method
           <paramtag>className The name of the class</paramtag>
         </xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="trim" use="optional">
+      <xsd:attribute name="trim">
         <xsd:annotation>
           <xsd:documentation>Sets whether whitespace inside this tag should be trimmed or not.Defaults to true so whitespace is trimmed</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="tagLib" use="optional">
+      <xsd:attribute name="tagLib">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="escapeText" use="optional">
+      <xsd:attribute name="escapeText">
         <xsd:annotation>
           <xsd:documentation>Sets whether the body of the tag should be escaped as text (so that &lt;and &gt;areescaped as &amp;lt; and &amp;gt;), which is the default or leave the text as XML.</xsd:documentation>
         </xsd:annotation>
@@ -1232,28 +1232,28 @@
         <versiontag>$Revision: 480454 $</versiontag>
       </xsd:documentation>
     </xsd:annotation>
-    <xsd:complexType>
+    <xsd:complexType mixed="true">
       <xsd:sequence>
         <xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
       </xsd:sequence>
-      <xsd:attribute name="var" use="optional">
+      <xsd:attribute name="var">
         <xsd:annotation>
           <xsd:documentation>Sets the name of the variable exported by this tag</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="className" use="optional">
+      <xsd:attribute name="className">
         <xsd:annotation>
           <xsd:documentation>Sets the class name of the object to instantiate</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="classLoader" use="optional">
+      <xsd:attribute name="classLoader">
         <xsd:annotation>
           <xsd:documentation>Set the class loader to be used for instantiating application objectswhen required.
           <paramtag>classLoader The new class loader to use, or &lt;code&gt;null&lt;/code&gt; to revert to the standard rules</paramtag>
         </xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="useContextClassLoader" use="optional">
+      <xsd:attribute name="useContextClassLoader">
         <xsd:annotation>
           <xsd:documentation>Determine whether to use the Context ClassLoader (the one found bycalling
           <code>Thread.currentThread().getContextClassLoader()</code>)to resolve/load classes. If notusing Context ClassLoader, then the class-loading defaults tousing the calling-class' ClassLoader.
@@ -1261,17 +1261,17 @@
         </xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="trim" use="optional">
+      <xsd:attribute name="trim">
         <xsd:annotation>
           <xsd:documentation>Sets whether whitespace inside this tag should be trimmed or not.Defaults to true so whitespace is trimmed</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="tagLib" use="optional">
+      <xsd:attribute name="tagLib">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="escapeText" use="optional">
+      <xsd:attribute name="escapeText">
         <xsd:annotation>
           <xsd:documentation>Sets whether the body of the tag should be escaped as text (so that &lt;and &gt;areescaped as &amp;lt; and &amp;gt;), which is the default or leave the text as XML.</xsd:documentation>
         </xsd:annotation>
@@ -1287,21 +1287,21 @@
         <versiontag>$Revision: 480454 $</versiontag>
       </xsd:documentation>
     </xsd:annotation>
-    <xsd:complexType>
+    <xsd:complexType mixed="true">
       <xsd:sequence>
         <xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
       </xsd:sequence>
-      <xsd:attribute name="trim" use="optional">
+      <xsd:attribute name="trim">
         <xsd:annotation>
           <xsd:documentation>Sets whether whitespace inside this tag should be trimmed or not.Defaults to true so whitespace is trimmed</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="tagLib" use="optional">
+      <xsd:attribute name="tagLib">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="escapeText" use="optional">
+      <xsd:attribute name="escapeText">
         <xsd:annotation>
           <xsd:documentation>Sets whether the body of the tag should be escaped as text (so that &lt;and &gt;areescaped as &amp;lt; and &amp;gt;), which is the default or leave the text as XML.</xsd:documentation>
         </xsd:annotation>

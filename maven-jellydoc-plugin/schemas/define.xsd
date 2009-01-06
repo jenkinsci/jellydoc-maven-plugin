@@ -12,26 +12,26 @@
         <versiontag>$Revision: 480467 $</versiontag>
       </xsd:documentation>
     </xsd:annotation>
-    <xsd:complexType>
+    <xsd:complexType mixed="true">
       <xsd:sequence>
         <xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
       </xsd:sequence>
-      <xsd:attribute name="script" use="optional">
+      <xsd:attribute name="script">
         <xsd:annotation>
           <xsd:documentation>Sets the Script to be invoked by this tag, which typically has been previouslydefined by the use of the &lt;script&gt;tag.</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="trim" use="optional">
+      <xsd:attribute name="trim">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="tagLib" use="optional">
+      <xsd:attribute name="tagLib">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="escapeText" use="optional">
+      <xsd:attribute name="escapeText">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
@@ -47,26 +47,26 @@
         <seetag>SuperTag</seetag>
       </xsd:documentation>
     </xsd:annotation>
-    <xsd:complexType>
+    <xsd:complexType mixed="true">
       <xsd:sequence>
         <xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
       </xsd:sequence>
-      <xsd:attribute name="name" use="optional">
+      <xsd:attribute name="name">
         <xsd:annotation>
           <xsd:documentation>Sets the name of the tag to create</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="trim" use="optional">
+      <xsd:attribute name="trim">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="tagLib" use="optional">
+      <xsd:attribute name="tagLib">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="escapeText" use="optional">
+      <xsd:attribute name="escapeText">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
@@ -80,41 +80,41 @@
         <versiontag>$Revision: 480467 $</versiontag>
       </xsd:documentation>
     </xsd:annotation>
-    <xsd:complexType>
+    <xsd:complexType mixed="true">
       <xsd:sequence>
         <xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
       </xsd:sequence>
-      <xsd:attribute name="name" use="optional">
+      <xsd:attribute name="name">
         <xsd:annotation>
           <xsd:documentation>Sets the name of the tag to create</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="className" use="optional">
+      <xsd:attribute name="className">
         <xsd:annotation>
           <xsd:documentation>Sets the Java class name to use for the tag</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="classLoader" use="optional">
+      <xsd:attribute name="classLoader">
         <xsd:annotation>
           <xsd:documentation>Sets the ClassLoader to use to load the class.If no value is set then the current threads context classloader is used.</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="varAttribute" use="optional">
+      <xsd:attribute name="varAttribute">
         <xsd:annotation>
           <xsd:documentation>Sets the name of the attribute used to define the bean variable that this dynamictag will output its results as. This defaults to 'var' though this propertycan be used to change this if it conflicts with a bean property called 'var'.</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="trim" use="optional">
+      <xsd:attribute name="trim">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="tagLib" use="optional">
+      <xsd:attribute name="tagLib">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="escapeText" use="optional">
+      <xsd:attribute name="escapeText">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
@@ -129,55 +129,55 @@
         <versiontag>$Revision: 480467 $</versiontag>
       </xsd:documentation>
     </xsd:annotation>
-    <xsd:complexType>
+    <xsd:complexType mixed="true">
       <xsd:sequence>
         <xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
       </xsd:sequence>
-      <xsd:attribute name="var" use="optional">
+      <xsd:attribute name="var">
         <xsd:annotation>
           <xsd:documentation>
             <paramtag>var the variable to store the class loader in</paramtag>
           </xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="url" use="optional">
+      <xsd:attribute name="url">
         <xsd:annotation>
           <xsd:documentation>
             <paramtag>url the url to load the classes from</paramtag>
           </xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="name" use="optional">
+      <xsd:attribute name="name">
         <xsd:annotation>
           <xsd:documentation>Sets the name of the tag to create</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="className" use="optional">
+      <xsd:attribute name="className">
         <xsd:annotation>
           <xsd:documentation>Sets the Java class name to use for the tag</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="classLoader" use="optional">
+      <xsd:attribute name="classLoader">
         <xsd:annotation>
           <xsd:documentation>Sets the ClassLoader to use to load the class.If no value is set then the current threads context classloader is used.</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="varAttribute" use="optional">
+      <xsd:attribute name="varAttribute">
         <xsd:annotation>
           <xsd:documentation>Sets the name of the attribute used to define the bean variable that this dynamictag will output its results as. This defaults to 'var' though this propertycan be used to change this if it conflicts with a bean property called 'var'.</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="trim" use="optional">
+      <xsd:attribute name="trim">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="tagLib" use="optional">
+      <xsd:attribute name="tagLib">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="escapeText" use="optional">
+      <xsd:attribute name="escapeText">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
@@ -191,26 +191,26 @@
         <versiontag>$Revision: 480467 $</versiontag>
       </xsd:documentation>
     </xsd:annotation>
-    <xsd:complexType>
+    <xsd:complexType mixed="true">
       <xsd:sequence>
         <xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
       </xsd:sequence>
-      <xsd:attribute name="var" use="optional">
+      <xsd:attribute name="var">
         <xsd:annotation>
           <xsd:documentation>Sets the variable name of the tag to create</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="trim" use="optional">
+      <xsd:attribute name="trim">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="tagLib" use="optional">
+      <xsd:attribute name="tagLib">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="escapeText" use="optional">
+      <xsd:attribute name="escapeText">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
@@ -224,21 +224,21 @@
         <versiontag>$Revision: 480467 $</versiontag>
       </xsd:documentation>
     </xsd:annotation>
-    <xsd:complexType>
+    <xsd:complexType mixed="true">
       <xsd:sequence>
         <xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
       </xsd:sequence>
-      <xsd:attribute name="trim" use="optional">
+      <xsd:attribute name="trim">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="tagLib" use="optional">
+      <xsd:attribute name="tagLib">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="escapeText" use="optional">
+      <xsd:attribute name="escapeText">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
@@ -253,21 +253,21 @@
         <seetag>ExtendTag</seetag>
       </xsd:documentation>
     </xsd:annotation>
-    <xsd:complexType>
+    <xsd:complexType mixed="true">
       <xsd:sequence>
         <xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
       </xsd:sequence>
-      <xsd:attribute name="trim" use="optional">
+      <xsd:attribute name="trim">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="tagLib" use="optional">
+      <xsd:attribute name="tagLib">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="escapeText" use="optional">
+      <xsd:attribute name="escapeText">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
@@ -282,36 +282,36 @@
         <versiontag>$Revision: 480467 $</versiontag>
       </xsd:documentation>
     </xsd:annotation>
-    <xsd:complexType>
+    <xsd:complexType mixed="true">
       <xsd:sequence>
         <xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
       </xsd:sequence>
-      <xsd:attribute name="name" use="optional">
+      <xsd:attribute name="name">
         <xsd:annotation>
           <xsd:documentation>Sets the name of the attribute</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="required" use="optional">
+      <xsd:attribute name="required">
         <xsd:annotation>
           <xsd:documentation>Sets whether this attribute is mandatory or not</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="defaultValue" use="optional">
+      <xsd:attribute name="defaultValue">
         <xsd:annotation>
           <xsd:documentation>Sets the default value of this attribute</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="trim" use="optional">
+      <xsd:attribute name="trim">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="tagLib" use="optional">
+      <xsd:attribute name="tagLib">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="escapeText" use="optional">
+      <xsd:attribute name="escapeText">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
@@ -325,26 +325,26 @@
         <versiontag>$Revision: 480467 $</versiontag>
       </xsd:documentation>
     </xsd:annotation>
-    <xsd:complexType>
+    <xsd:complexType mixed="true">
       <xsd:sequence>
         <xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
       </xsd:sequence>
-      <xsd:attribute name="name" use="optional">
+      <xsd:attribute name="name">
         <xsd:annotation>
           <xsd:documentation>Sets the name of the tag to create</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="trim" use="optional">
+      <xsd:attribute name="trim">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="tagLib" use="optional">
+      <xsd:attribute name="tagLib">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="escapeText" use="optional">
+      <xsd:attribute name="escapeText">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
@@ -358,36 +358,36 @@
         <versiontag>$Revision: 480467 $</versiontag>
       </xsd:documentation>
     </xsd:annotation>
-    <xsd:complexType>
+    <xsd:complexType mixed="true">
       <xsd:sequence>
         <xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
       </xsd:sequence>
-      <xsd:attribute name="name" use="optional">
+      <xsd:attribute name="name">
         <xsd:annotation>
           <xsd:documentation>Sets the name of the tag to create</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="varAttribute" use="optional">
+      <xsd:attribute name="varAttribute">
         <xsd:annotation>
           <xsd:documentation>Sets the name of the attribute used to define the bean variable that this dynamictag will output its results as. This defaults to 'var' though this propertycan be used to change this if it conflicts with a bean property called 'var'.</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="dynaClass" use="optional">
+      <xsd:attribute name="dynaClass">
         <xsd:annotation>
           <xsd:documentation>Sets the org.apache.commons.beanutils.DynaClasswhich will be bound to this dynamic tag.</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="trim" use="optional">
+      <xsd:attribute name="trim">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="tagLib" use="optional">
+      <xsd:attribute name="tagLib">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="escapeText" use="optional">
+      <xsd:attribute name="escapeText">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
@@ -401,46 +401,46 @@
         <versiontag>$Revision: 480467 $</versiontag>
       </xsd:documentation>
     </xsd:annotation>
-    <xsd:complexType>
+    <xsd:complexType mixed="true">
       <xsd:sequence>
         <xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
       </xsd:sequence>
-      <xsd:attribute name="method" use="optional">
+      <xsd:attribute name="method">
         <xsd:annotation>
           <xsd:documentation>Sets the name of the method to invoke on the bean.This defaults to "run" so that Runnable objects can beinvoked, but this property can be set to whatever is required,such as "execute" or "invoke"</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="name" use="optional">
+      <xsd:attribute name="name">
         <xsd:annotation>
           <xsd:documentation>Sets the name of the tag to create</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="className" use="optional">
+      <xsd:attribute name="className">
         <xsd:annotation>
           <xsd:documentation>Sets the Java class name to use for the tag</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="classLoader" use="optional">
+      <xsd:attribute name="classLoader">
         <xsd:annotation>
           <xsd:documentation>Sets the ClassLoader to use to load the class.If no value is set then the current threads context classloader is used.</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="varAttribute" use="optional">
+      <xsd:attribute name="varAttribute">
         <xsd:annotation>
           <xsd:documentation>Sets the name of the attribute used to define the bean variable that this dynamictag will output its results as. This defaults to 'var' though this propertycan be used to change this if it conflicts with a bean property called 'var'.</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="trim" use="optional">
+      <xsd:attribute name="trim">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="tagLib" use="optional">
+      <xsd:attribute name="tagLib">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="escapeText" use="optional">
+      <xsd:attribute name="escapeText">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
@@ -454,33 +454,33 @@
         <versiontag>$Revision: 480467 $</versiontag>
       </xsd:documentation>
     </xsd:annotation>
-    <xsd:complexType>
+    <xsd:complexType mixed="true">
       <xsd:sequence>
         <xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
       </xsd:sequence>
-      <xsd:attribute name="uri" use="optional">
+      <xsd:attribute name="uri">
         <xsd:annotation>
           <xsd:documentation>Sets the namespace URI to register this new dynamic tag library with</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="inherit" use="optional">
+      <xsd:attribute name="inherit">
         <xsd:annotation>
           <xsd:documentation>Sets whether this dynamic tag should inherit from the current existing tag libraryof the same URI. This feature is enabled by default so that tags can easily besome tags can be overridden in an existing library, such as when making Mock Tags.You can disable this option if you want to disable any tags in the base library,turning them into just normal static XML.
           <paramtag>inherit The inherit to set</paramtag>
         </xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="trim" use="optional">
+      <xsd:attribute name="trim">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="tagLib" use="optional">
+      <xsd:attribute name="tagLib">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
       </xsd:attribute>
-      <xsd:attribute name="escapeText" use="optional">
+      <xsd:attribute name="escapeText">
         <xsd:annotation>
           <xsd:documentation/>
         </xsd:annotation>
