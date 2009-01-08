@@ -178,7 +178,7 @@ public class ReferenceRenderer extends AbstractMavenReportRenderer {
         Element doc = parent.element("doc");
         // remove all javadoc tags that don't belong.
         doc.content().removeAll(doc.elements("authortag"));
-        String xml = doc.asXML();
+        String xml = doc.getText();
 
         StringWriter w = new StringWriter();
         MarkupParser parser = new MarkupParser(new ConfluenceDialect());
