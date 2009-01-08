@@ -28,6 +28,11 @@ import net.java.textilej.parser.markup.confluence.ConfluenceDialect;
  */
 public class ReferenceRenderer extends AbstractMavenReportRenderer {
     private final Document taglibXml;
+    private static final Comparator<Element> SORT_BY_NAME = new Comparator<Element>() {
+            public int compare(Element o1, Element o2) {
+            return o1.attributeValue("name").compareTo(o2.attributeValue("name"));
+        }
+    };
 
     public ReferenceRenderer(Sink sink, URL taglibXml) throws DocumentException {
         super(sink);
@@ -39,7 +44,7 @@ public class ReferenceRenderer extends AbstractMavenReportRenderer {
     }
 
     protected void renderBody() {
-        List<Element> libraries = (List<Element>) taglibXml.getRootElement().elements("library");
+        List<Element> libraries = sortByName((List<Element>) taglibXml.getRootElement().elements("library"));
 
         paragraph("The following Jelly tag libraries are defined in this project.");
 
@@ -69,7 +74,7 @@ public class ReferenceRenderer extends AbstractMavenReportRenderer {
             paragraphHtml("This tag library is <a href='taglib-"+prefix+".xsd'>also available as an XML Schema</a>");
             renderSummaryTable(library,prefix);
 
-            for( Element tag : (List<Element>)library.elements("tag"))
+            for( Element tag : sortByName((List<Element>)library.elements("tag")))
                 renderTagReference(prefix,tag);
 
             endSection();
@@ -85,13 +90,8 @@ public class ReferenceRenderer extends AbstractMavenReportRenderer {
     private void renderSummaryTable(Element library, String prefix) {
         startTable();
         tableHeader(new String[]{"Tag Name","Description"});
-        // sory by name
-        List<Element> tags = new ArrayList<Element>((List<Element>) library.elements("tag"));
-        Collections.sort(tags,new Comparator<Element>() {
-            public int compare(Element o1, Element o2) {
-                return o1.attributeValue("name").compareTo(o2.attributeValue("name"));
-            }
-        });
+
+        List<Element> tags = sortByName((List<Element>) library.elements("tag"));
 
         for( Element tag : tags) {
             sink.tableRow();
@@ -103,6 +103,12 @@ public class ReferenceRenderer extends AbstractMavenReportRenderer {
             sink.tableRow_();
         }
         endTable();
+    }
+
+    private List<Element> sortByName(List<Element> list) {
+        List<Element> tags = new ArrayList<Element>(list);
+        Collections.sort(tags,SORT_BY_NAME);
+        return tags;
     }
 
     /**
@@ -117,7 +123,7 @@ public class ReferenceRenderer extends AbstractMavenReportRenderer {
         if(hasVisibleAttributes(tag)) {
             startTable();
             tableHeader(new String[]{"Attribute Name","Type","Description"});
-            for( Element att : (List<Element>)tag.elements("attribute"))
+            for( Element att : sortByName((List<Element>)tag.elements("attribute")))
                 renderAttribute(att);
             endTable();
         }
