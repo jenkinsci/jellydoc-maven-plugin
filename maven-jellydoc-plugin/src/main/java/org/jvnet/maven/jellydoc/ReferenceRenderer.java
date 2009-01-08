@@ -12,6 +12,11 @@ import java.util.List;
 import java.util.Set;
 import java.util.HashSet;
 import java.util.Arrays;
+import java.io.StringWriter;
+
+import net.java.textilej.parser.MarkupParser;
+import net.java.textilej.parser.builder.HtmlDocumentBuilder;
+import net.java.textilej.parser.markup.confluence.ConfluenceDialect;
 
 /**
  * Generates a Maven report from <tt>taglib.xml</tt>.
@@ -173,7 +178,21 @@ public class ReferenceRenderer extends AbstractMavenReportRenderer {
         Element doc = parent.element("doc");
         // remove all javadoc tags that don't belong.
         doc.content().removeAll(doc.elements("authortag"));
-        return doc.asXML();
+        String xml = doc.asXML();
+
+        StringWriter w = new StringWriter();
+        MarkupParser parser = new MarkupParser(new ConfluenceDialect());
+        HtmlDocumentBuilder builder = new HtmlDocumentBuilder(w) {
+            @Override
+            public void lineBreak() {
+                // no line break since IDEs usually don't wrap text.
+            }
+        };
+
+        builder.setEmitAsDocument(false);
+        parser.setBuilder(builder);
+        parser.parse(xml);
+        return w.toString();
     }
 
     private static final Set<String> HIDDEN_ATTRIBUTES = new HashSet<String>(Arrays.asList("escapeText","trim"));
