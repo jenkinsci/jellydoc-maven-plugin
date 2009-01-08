@@ -12,6 +12,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.HashSet;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.ArrayList;
 import java.io.StringWriter;
 
 import net.java.textilej.parser.MarkupParser;
@@ -82,7 +85,15 @@ public class ReferenceRenderer extends AbstractMavenReportRenderer {
     private void renderSummaryTable(Element library, String prefix) {
         startTable();
         tableHeader(new String[]{"Tag Name","Description"});
-        for( Element tag : (List<Element>)library.elements("tag")) {
+        // sory by name
+        List<Element> tags = new ArrayList<Element>((List<Element>) library.elements("tag"));
+        Collections.sort(tags,new Comparator<Element>() {
+            public int compare(Element o1, Element o2) {
+                return o1.attributeValue("name").compareTo(o2.attributeValue("name"));
+            }
+        });
+
+        for( Element tag : tags) {
             sink.tableRow();
             sink.tableCell();
             String name = tag.attributeValue("name");
