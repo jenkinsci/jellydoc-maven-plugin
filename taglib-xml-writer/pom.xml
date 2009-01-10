@@ -3,7 +3,7 @@
   <parent>
     <groupId>org.jvnet.maven-jellydoc-plugin</groupId>
     <artifactId>jellydoc</artifactId>
-    <version>1.4-SNAPSHOT</version>
+    <version>1.4</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
   <artifactId>taglib-xml-writer</artifactId>
