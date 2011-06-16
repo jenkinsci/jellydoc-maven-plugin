@@ -11,8 +11,8 @@
   <description>Generate documentation from Jelly tag libraries</description>
 
   <scm>
-    <connection>scm:svn:https://svn.dev.java.net/svn/maven-jellydoc-plugin/trunk/jellydoc/</connection>
-    <developerConnection>scm:svn:https://svn.dev.java.net/svn/maven-jellydoc-plugin/trunk/jellydoc/</developerConnection>
+    <connection>git:git@github.com/kohsuke/maven-jellydoc-plugin.git</connection>
+    <developerConnection>git:git@github.com/kohsuke/maven-jellydoc-plugin.git</developerConnection>
     <url>https://maven-jellydoc-plugin.dev.java.net/source/browse/hudson/trunk/jellydoc</url>
   </scm>
 
