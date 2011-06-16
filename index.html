@@ -15,20 +15,36 @@
     <style type="text/css" media="all">
       @import url("./css/maven-base.css");
       @import url("./css/maven-theme.css");
+      @import url("./css/1024px.css");
       @import url("./css/site.css");
     </style>
-    <link rel="stylesheet" href="./css/print.css" type="text/css" media="print" />
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
       </head>
-  <body class="composite">
-    <!-- TODO: move this into JavaScript to patch the skin
+  <body>
+    <div id="wrap2"><div id="wrap">
+    <div id="header">
+      <p id="toplinks">Skip to: <a href="#content">Content</a> | <a href="#sidebar">Navigation</a> | <a href="#footer">Footer</a></p>
+		
+            <h1 id="bannerLeft">
+    
+            Jellydoc
+    
+        </h1>
+                
+      <p id="slogan">${project.description}</p>
+    </div>
+    <div id="breadcrumbs">
       <div class="xright">  </div>
-    -->
-    <div id="leftColumn">
+      <div class="clear">
+        <hr/>
+      </div>
+    </div>
+
+    <div id="sidebar">
       <div id="navcolumn">
-             <dl class=navgroup>
-        <dt>Maven Jellydoc Plugin</dt>
-        <dd><ul>
+              <h2>
+          Maven Jellydoc Plugin
+        </h2><ul>
               
     <li class="none">
               <strong>Overview</strong>
@@ -45,11 +61,10 @@
     <li class="none">
               <a href="servlets/ProjectIssues">Issues</a>
         </li>
-          </ul></dd>
-    </dl>
-      <dl class=navgroup>
-        <dt>Modules</dt>
-        <dd><ul>
+          </ul>
+      <h2>
+          Modules
+        </h2><ul>
               
     <li class="none">
               <a href="maven-jellydoc-plugin/">Maven plugin</a>
@@ -58,35 +73,10 @@
     <li class="none">
               <a href="jellydoc-annotations/">Annotations</a>
         </li>
-          </ul></dd>
-    </dl>
+          </ul>
         </div>
-      <script>
-        // replace the java.net project tools with the navigation bar from Maven.
-        // also get rid of "Get Involved" thingie too, while we are at it
-        var pt = document.getElementById("projecttools");
-        var nv = document.getElementById("navcolumn");
-        
-        while(pt.previousSibling!=null)
-          pt.parentNode.removeChild(pt.previousSibling);
-        
-        pt.parentNode.insertBefore(nv,pt);
-        pt.parentNode.removeChild(pt);
-      </script>
-      <script>
-        // kill "description" h3 bar
-        var ld = document.getElementById("longdescription");
-        if(ld!=null) {
-          for( n=ld.firstChild; n!=null; n=n.nextSibling ) {
-            if(n.nodeType==1 && n.innerHTML=="Description" ) {
-              n.parentNode.removeChild(n);
-              break;
-            }
-          }
-        }
-      </script>
     </div>
-    <div id="bodyColumn">
+    <div id="content">
       <div id="contentBox">
         <p><tt>maven-jellydoc-plugin</tt> is a Maven2 plugin for generating taglib documentation for <a href="http://commons.apache.org/jelly/" class="externalLink">Apache Commons Jelly</a> from Java source code. In addition, this tool also has the following features:</p>
 <ul><li>Generating XML Schema for taglib, which in turn can be used in schema-aware editors</li>
@@ -133,9 +123,6 @@
 
       </div>
     </div>
-    <div class="clear">
-      <hr/>
-    </div>
     <div id="footer">
       <div class="xright">&#169;  
           2011
@@ -152,5 +139,6 @@
         <hr/>
       </div>
     </div>
+    </div></div>
   </body>
 </html>
