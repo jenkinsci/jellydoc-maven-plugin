@@ -16,6 +16,14 @@
     <url>https://maven-jellydoc-plugin.dev.java.net/source/browse/hudson/trunk/jellydoc</url>
   </scm>
 
+  <licenses>
+    <license>
+      <name>Apache Software License</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
   <distributionManagement>
     <repository>
       <id>java.net</id>
