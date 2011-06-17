@@ -10,9 +10,9 @@
     <menu name="Maven Jellydoc Plugin">
       <item name="Overview" href="index.html"/>
 
-      <item name="Mailing lists" href="servlets/ProjectMailingListList"/>
-      <item name="Source code" href="source/browse/trunk/jellydoc/"/>
-      <item name="Issues" href="servlets/ProjectIssues"/>
+      <!--item name="Mailing lists" href="servlets/ProjectMailingListList"/-->
+      <item name="Source code" href="https://github.com/kohsuke/maven-jellydoc-plugin"/>
+      <item name="Issues" href="http://java.net/jira/browse/MAVEN_JELLYDOC_PLUGIN"/>
     </menu>
     <menu name="Modules">
       <item name="Maven plugin" href="maven-jellydoc-plugin/"/>

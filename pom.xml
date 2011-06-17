@@ -13,7 +13,7 @@
   <scm>
     <connection>git:git@github.com/kohsuke/maven-jellydoc-plugin.git</connection>
     <developerConnection>git:git@github.com/kohsuke/maven-jellydoc-plugin.git</developerConnection>
-    <url>https://maven-jellydoc-plugin.dev.java.net/source/browse/hudson/trunk/jellydoc</url>
+    <url>http://maven-jellydoc-plugin.kohsuke.org/</url>
   </scm>
 
   <licenses>
