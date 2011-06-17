@@ -11,8 +11,8 @@
   <description>Generate documentation from Jelly tag libraries</description>
 
   <scm>
-    <connection>git:git@github.com/kohsuke/maven-jellydoc-plugin.git</connection>
-    <developerConnection>git:git@github.com/kohsuke/maven-jellydoc-plugin.git</developerConnection>
+    <connection>scm:git:git@github.com/kohsuke/maven-jellydoc-plugin.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/kohsuke/maven-jellydoc-plugin.git</developerConnection>
     <url>http://maven-jellydoc-plugin.kohsuke.org/</url>
   </scm>
 
