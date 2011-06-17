@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.jvnet.maven-jellydoc-plugin</groupId>
   <artifactId>jellydoc</artifactId>
-  <version>1.5</version>
+  <version>1.6-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Jellydoc</name>
