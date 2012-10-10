@@ -11,7 +11,7 @@
 
 <html>
   <head>
-    <title>Jelly Taglib Doc Generator</title>
+    <title>About</title>
     <style type="text/css" media="all">
       @import url("./css/maven-base.css");
       @import url("./css/maven-theme.css");
@@ -27,7 +27,7 @@
 		
             <h1 id="bannerLeft">
     
-            Jellydoc
+            Jellydoc annotations
     
         </h1>
                 
@@ -42,162 +42,11 @@
 
     <div id="sidebar">
       <div id="navcolumn">
-              <h2>
-          Maven Jellydoc Plugin
-        </h2><ul>
-              
-    <li class="none">
-              <strong>Overview</strong>
-        </li>
-              
-    <li class="none">
-              <a href="https://github.com/kohsuke/maven-jellydoc-plugin">Source code</a>
-        </li>
-              
-    <li class="none">
-              <a href="http://java.net/jira/browse/MAVEN_JELLYDOC_PLUGIN">Issues</a>
-        </li>
-          </ul>
-      <h2>
-          Modules
-        </h2><ul>
-              
-    <li class="none">
-              <a href="maven-jellydoc-plugin/">Maven plugin</a>
-        </li>
-              
-    <li class="none">
-              <a href="jellydoc-annotations/">Annotations</a>
-        </li>
-          </ul>
-      <h2>
-          Project Documentation
-        </h2><ul>
-              
-                
-              
-            
-            
-      
-            
-      
-            
-      
-            
-      
-            
-      
-            
-      
-            
-      
-            
-      
-            
-      
-            
-      
-            
-      
-            
-      
-            
-      
-            
-      
-              
-            <li class="expanded">
-              <a href="project-info.html">Project Information</a>
-                <ul>
-                  
-    <li class="none">
-              <strong>About</strong>
-        </li>
-                  
-    <li class="none">
-              <a href="plugin-management.html">Plugin Management</a>
-        </li>
-                  
-    <li class="none">
-              <a href="distribution-management.html">Distribution Management</a>
-        </li>
-                  
-    <li class="none">
-              <a href="dependency-info.html">Dependency Information</a>
-        </li>
-                  
-    <li class="none">
-              <a href="dependency-convergence.html">Dependency Convergence</a>
-        </li>
-                  
-    <li class="none">
-              <a href="source-repository.html">Source Repository</a>
-        </li>
-                  
-    <li class="none">
-              <a href="mail-lists.html">Mailing Lists</a>
-        </li>
-                  
-    <li class="none">
-              <a href="issue-tracking.html">Issue Tracking</a>
-        </li>
-                  
-    <li class="none">
-              <a href="integration.html">Continuous Integration</a>
-        </li>
-                  
-    <li class="none">
-              <a href="plugins.html">Project Plugins</a>
-        </li>
-                  
-    <li class="none">
-              <a href="license.html">Project License</a>
-        </li>
-                  
-    <li class="none">
-              <a href="modules.html">Project Modules</a>
-        </li>
-                  
-    <li class="none">
-              <a href="team-list.html">Project Team</a>
-        </li>
-                  
-    <li class="none">
-              <a href="project-summary.html">Project Summary</a>
-        </li>
-                  
-    <li class="none">
-              <a href="dependencies.html">Dependencies</a>
-        </li>
-              </ul>
-        </li>
-          </ul>
-        </div>
+                </div>
     </div>
     <div id="content">
       <div id="contentBox">
-        <p><tt>maven-jellydoc-plugin</tt> is a Maven2 plugin for generating taglib documentation for <a class="externalLink" href="http://commons.apache.org/jelly/">Apache Commons Jelly</a> from Java source code. In addition, this tool also has the following features:</p><ul><li>Generating XML Schema for taglib, which in turn can be used in schema-aware editors</li><li>A set of annotations to describe the constraints of tags (such as whether an attribute is required.)</li></ul><p>To use this plugin, typically you configure your POM like this:</p><div><pre>&lt;reporting&gt;
-  &lt;plugins&gt;
-    &lt;plugin&gt;
-      &lt;groupId&gt;org.jvnet.maven-jellydoc-plugin&lt;/groupId&gt;
-      &lt;artifactId&gt;maven-jellydoc-plugin&lt;/artifactId&gt;
-    &lt;/plugin&gt;
-  &lt;/plugins&gt;
-&lt;/reporting&gt;</pre></div><p>When you run the <tt>site</tt> goal in Maven, this will render HTML documentation and XML schema, and they will be added to the generated site.</p><p>Alternatively, or in addition, adding the <tt>jellydoc</tt> goal to the build section will attach XML schema to the artifacts, (thus if you deploy or release, the schema will also gets deployed.)</p><div><pre>&lt;build&gt;
-  &lt;plugins&gt;
-    &lt;plugin&gt;
-      &lt;groupId&gt;org.jvnet.maven-jellydoc-plugin&lt;/groupId&gt;
-      &lt;artifactId&gt;maven-jellydoc-plugin&lt;/artifactId&gt;
-      &lt;executions&gt;
-        &lt;execution&gt;
-          &lt;goals&gt;
-            &lt;goal&gt;jellydoc&lt;/goal&gt;
-          &lt;/goals&gt;
-        &lt;/execution&gt;
-      &lt;/executions&gt;
-    &lt;/plugin&gt;
-  &lt;/plugins&gt;
-&lt;/build&gt;</pre></div><p>This Maven plugin is implemented as a javadoc doclet, and thus it scans your source code and find out all the Jelly tags classes. Documentation will be taken from javadoc.</p><div class="section"><h2>Quick links<a name="Quick_links"></a></h2><ul><li><a href="#maven-jellydoc-pluginplugin-info.html">Maven Plugin Reference</a></li><li><a href="#nonavjellydoc-annotationsapidocs">Annoations javadoc</a></li></ul></div><div class="section"><h2>Schema for official Jelly tag libraries<a name="Schema_for_official_Jelly_tag_libraries"></a></h2><p>For your convenience, I've run this tool on <a class="externalLink" href="http://commons.apache.org/jelly/libs/index.html">the official Jelly tag libraries</a> maintained at Apache and generated schemas. <a href="./jelly-schemas.zip">They can be downloaded from here</a>.</p><p>These schemas can be then loaded into your IDE to enable schema-guided editing of those tags.</p></div>
+        <div class="section"><h2>About Jellydoc annotations<a name="About_Jellydoc_annotations"></a></h2><a name="About_Jellydoc_annotations"></a><p>Generate documentation from Jelly tag libraries</p></div>
       </div>
     </div>
     <div id="footer">
