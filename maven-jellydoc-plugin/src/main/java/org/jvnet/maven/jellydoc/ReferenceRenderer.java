@@ -37,7 +37,7 @@ import net.java.textilej.parser.builder.HtmlDocumentBuilder;
 import net.java.textilej.parser.markup.confluence.ConfluenceDialect;
 
 /**
- * Generates a Maven report from <tt>taglib.xml</tt>.
+ * Generates a Maven report from {@code taglib.xml}.
  *
  * @author Kohsuke Kawaguchi
  */

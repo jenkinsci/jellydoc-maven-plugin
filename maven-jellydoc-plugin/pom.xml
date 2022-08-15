@@ -4,7 +4,7 @@
   <parent>
     <groupId>org.jvnet.maven-jellydoc-plugin</groupId>
     <artifactId>jellydoc</artifactId>
-    <version>1.6-SNAPSHOT</version>
+    <version>${revision}${changelist}</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
   <artifactId>maven-jellydoc-plugin</artifactId>
@@ -16,18 +16,58 @@
     <plugins>
       <plugin>
         <artifactId>maven-plugin-plugin</artifactId>
+        <version>${maven-plugin-tools.version}</version>
         <configuration>
           <goalPrefix>jellydoc</goalPrefix>
         </configuration>
       </plugin>
+      <!-- TODO remove some of these after upgrading to Maven 3 APIs -->
+      <plugin>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>display-info</id>
+            <configuration>
+              <rules>
+                <requireUpperBoundDeps>
+                  <excludes combine.children="append">
+                    <exclude>commons-logging:commons-logging</exclude>
+                    <exclude>org.apache.maven.doxia:doxia-logging-api</exclude>
+                    <exclude>org.apache.maven.reporting:maven-reporting-api</exclude>
+                    <exclude>org.codehaus.plexus:plexus-container-default</exclude>
+                    <exclude>org.codehaus.plexus:plexus-interactivity-api</exclude>
+                    <exclude>org.codehaus.plexus:plexus-utils</exclude>
+                    <exclude>org.slf4j:slf4j-nop</exclude>
+                    <exclude>xerces:xercesImpl</exclude>
+                    <exclude>xml-apis:xml-apis</exclude>
+                  </excludes>
+                </requireUpperBoundDeps>
+              </rules>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
+
+  <properties>
+    <maven.version>2.2.1</maven.version>
+    <maven-plugin-tools.version>3.6.4</maven-plugin-tools.version>
+    <!-- TODO fix violations -->
+    <spotbugs.threshold>High</spotbugs.threshold>
+  </properties>
 
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>jellydoc-annotations</artifactId>
       <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven.plugin-tools</groupId>
+      <artifactId>maven-plugin-annotations</artifactId>
+      <version>${maven-plugin-tools.version}</version>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
@@ -42,22 +82,22 @@
     <dependency>
       <groupId>org.apache.maven</groupId>
       <artifactId>maven-plugin-api</artifactId>
-      <version>2.0.1</version>
+      <version>${maven.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.maven</groupId>
       <artifactId>maven-core</artifactId>
-      <version>2.0.1</version>
+      <version>${maven.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.maven</groupId>
       <artifactId>maven-project</artifactId>
-      <version>2.0.1</version>
+      <version>${maven.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.maven</groupId>
       <artifactId>maven-artifact</artifactId>
-      <version>2.0.1</version>
+      <version>${maven.version}</version>
     </dependency>
     <dependency>
       <groupId>nekohtml</groupId>
@@ -65,14 +105,9 @@
       <version>1.9.6.2</version>
     </dependency>
     <dependency>
-      <groupId>dom4j</groupId>
+      <groupId>org.dom4j</groupId>
       <artifactId>dom4j</artifactId>
-      <version>1.6.1</version>
-    </dependency>
-    <dependency>
-      <groupId>jaxen</groupId>
-      <artifactId>jaxen</artifactId>
-      <version>1.1.1</version>
+      <version>2.1.3</version>
     </dependency>
     <dependency>
       <groupId>ant</groupId>
@@ -86,15 +121,12 @@
     </dependency>
   </dependencies>
 
+  <!-- TODO migrate to new APIs described in https://docs.oracle.com/en/java/javase/11/docs/api/jdk.javadoc/jdk/javadoc/doclet/package-summary.html#migration -->
   <profiles>
     <profile>
-      <!-- This is only for non MAC OS X builds, hence the property below -->
-      <id>default-tools.jar</id>
+      <id>jdk-8-and-below</id>
       <activation>
-        <property>
-          <name>java.vendor</name>
-          <value>Sun Microsystems Inc.</value>
-        </property>
+        <jdk>(,1.8]</jdk>
       </activation>
       <dependencies>
         <dependency>
