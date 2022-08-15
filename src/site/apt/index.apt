@@ -55,9 +55,9 @@
 
 Quick links
 
-  * {{{maven-jellydoc-plugin/plugin-info.html}Maven Plugin Reference}}
+  * {{{./maven-jellydoc-plugin/plugin-info.html}Maven Plugin Reference}}
 
-  * {{{nonav/jellydoc-annotations/apidocs/}Annoations javadoc}}
+  * {{{./jellydoc-annotations/apidocs/}Annotations javadoc}}
   
   []
 

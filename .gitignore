@@ -1,4 +1,15 @@
 target
-*.ipr
+
+# mvn hpi:run
+work
+
+# IntelliJ IDEA project files
 *.iml
 *.iws
+*.ipr
+.idea
+
+# Eclipse project files
+.settings
+.classpath
+.project

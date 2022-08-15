@@ -24,6 +24,12 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.AbstractMojoExecutionException;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.plugins.annotations.Component;
+import org.apache.maven.plugins.annotations.Execute;
+import org.apache.maven.plugins.annotations.LifecyclePhase;
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
+import org.apache.maven.plugins.annotations.ResolutionScope;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.project.MavenProjectHelper;
 import org.apache.maven.reporting.MavenReport;
@@ -37,6 +43,7 @@ import org.codehaus.doxia.sink.Sink;
 import org.codehaus.plexus.util.FileUtils;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
+import org.dom4j.Node;
 import org.dom4j.tree.DefaultDocument;
 import org.dom4j.io.DocumentSource;
 import org.dom4j.io.SAXReader;
@@ -59,63 +66,47 @@ import java.util.Locale;
  * Generates jellydoc XML and other artifacts from there.
  *
  * @author Kohsuke Kawaguchi
- * @goal jellydoc
- * @phase generate-sources
- * @requiresDependencyResolution compile
  */
-@SuppressWarnings({"unchecked"})
+@Mojo(name = "jellydoc", requiresDependencyResolution = ResolutionScope.COMPILE)
+@Execute(phase = LifecyclePhase.GENERATE_SOURCES)
 public class JellydocMojo extends AbstractMojo implements MavenReport {
     /**
      * The Maven Project Object
-     *
-     * @parameter expression="${project}"
-     * @required
-     * @readonly
      */
+    @Parameter(defaultValue = "${project}", required = true, readonly = true)
     public MavenProject project;
 
     /**
      * The plugin dependencies.
-     *
-     * @parameter expression="${plugin.artifacts}"
-     * @required
-     * @readonly
      */
+    @Parameter(defaultValue = "${plugin.artifacts}", required = true, readonly = true)
     public List<Artifact> pluginArtifacts;
 
     /**
      * Version of this plugin.
-     *
-     * @parameter expression="${plugin.version}"
-     * @required
-     * @readonly
      */
+    @Parameter(defaultValue = "${plugin.version}", required = true, readonly = true)
     public String pluginVersion;
 
     /**
      * Factory for creating artifact objects
-     *
-     * @component
      */
+    @Component
     public ArtifactFactory factory;
 
     /**
      * Used for resolving artifacts
-     *
-     * @component
      */
+    @Component
     public ArtifactResolver resolver;
 
     /**
      * The local repository where the artifacts are located.
-     *
-     * @parameter expression="${localRepository}"
      */
+    @Parameter(defaultValue = "${localRepository}")
     public ArtifactRepository localRepository;
 
-    /**
-     * @component
-     */
+    @Component
     public MavenProjectHelper helper;
 
     private File outputDirectory;
@@ -170,7 +161,8 @@ public class JellydocMojo extends AbstractMojo implements MavenReport {
             TransformerFactory tf = TransformerFactory.newInstance();
             Templates templates = tf.newTemplates(new StreamSource(JellydocMojo.class.getResource("xsdgen.xsl").toExternalForm()));
             File source = new File(project.getBasedir(), "target/taglib.xml");
-            for(Element lib : (List<Element>)new SAXReader().read(source).selectNodes("/tags/library")) {
+            for(Node node : new SAXReader().read(source).selectNodes("/tags/library")) {
+                Element lib = (Element) node;
                 String prefix = lib.attributeValue("prefix");
 
                 File schema = new File(project.getBasedir(), "target/taglib-"+prefix+".xsd");

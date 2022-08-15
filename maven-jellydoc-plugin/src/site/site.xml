@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <body>
+    <menu name="Overview">
+      <item name="Goals" href="plugin-info.html">
+        <item name="jellydoc:jellydoc" href="jellydoc-mojo.html"/>
+      </item>
+    </menu>
+  </body>
+</project>
