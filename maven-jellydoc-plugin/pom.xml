@@ -47,6 +47,28 @@
           </execution>
         </executions>
       </plugin>
+      <!--
+        This is necessary to ensure that java.home from the build machine doesn't get expanded in
+        the tools.jar dependency below. When we migrate to Java 11 APIs, this should be deleted.
+      -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>flatten-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>flatten</id>
+            <goals>
+              <goal>flatten</goal>
+            </goals>
+            <phase>process-resources</phase>
+            <configuration>
+              <pomElements>
+                <profiles>keep</profiles>
+              </pomElements>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
 
