@@ -16,4 +16,11 @@
       <version>20110809</version>
     </dependency>
   </dependencies>
+
+  <distributionManagement>
+    <site>
+      <id>github.com</id>
+      <url>gitsite:git@github.com/${gitHubRepo}.git/taglib-xml-writer/</url>
+    </site>
+  </distributionManagement>
 </project>

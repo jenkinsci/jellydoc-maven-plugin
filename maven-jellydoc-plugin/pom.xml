@@ -162,6 +162,13 @@
     </profile>
   </profiles>
 
+  <distributionManagement>
+    <site>
+      <id>github.com</id>
+      <url>gitsite:git@github.com/${gitHubRepo}.git/maven-jellydoc-plugin/</url>
+    </site>
+  </distributionManagement>
+
   <reporting>
     <plugins>
       <plugin>

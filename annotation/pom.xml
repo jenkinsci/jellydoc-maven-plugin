@@ -11,6 +11,13 @@
   <artifactId>jellydoc-annotations</artifactId>
   <name>Jellydoc annotations</name>
 
+  <distributionManagement>
+    <site>
+      <id>github.com</id>
+      <url>gitsite:git@github.com/${gitHubRepo}.git/jellydoc-annotations/</url>
+    </site>
+  </distributionManagement>
+
   <reporting>
     <plugins>
       <plugin>
