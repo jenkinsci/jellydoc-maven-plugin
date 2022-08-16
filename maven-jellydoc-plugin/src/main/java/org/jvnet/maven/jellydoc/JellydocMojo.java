@@ -17,9 +17,7 @@ package org.jvnet.maven.jellydoc;
 
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.artifact.factory.ArtifactFactory;
-import org.apache.maven.artifact.repository.ArtifactRepository;
-import org.apache.maven.artifact.resolver.AbstractArtifactResolutionException;
-import org.apache.maven.artifact.resolver.ArtifactResolver;
+import org.apache.maven.execution.MavenSession;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.AbstractMojoExecutionException;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -34,6 +32,8 @@ import org.apache.maven.project.MavenProject;
 import org.apache.maven.project.MavenProjectHelper;
 import org.apache.maven.reporting.MavenReport;
 import org.apache.maven.reporting.MavenReportException;
+import org.apache.maven.shared.transfer.artifact.resolve.ArtifactResolver;
+import org.apache.maven.shared.transfer.artifact.resolve.ArtifactResolverException;
 import org.apache.tools.ant.DefaultLogger;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.taskdefs.Javadoc;
@@ -77,6 +77,12 @@ public class JellydocMojo extends AbstractMojo implements MavenReport {
     public MavenProject project;
 
     /**
+     * The Maven session object.
+     */
+    @Parameter(defaultValue = "${session}", required = true, readonly = true)
+    public MavenSession session;
+
+    /**
      * The plugin dependencies.
      */
     @Parameter(defaultValue = "${plugin.artifacts}", required = true, readonly = true)
@@ -99,12 +105,6 @@ public class JellydocMojo extends AbstractMojo implements MavenReport {
      */
     @Component
     public ArtifactResolver resolver;
-
-    /**
-     * The local repository where the artifacts are located.
-     */
-    @Parameter(defaultValue = "${localRepository}")
-    public ArtifactRepository localRepository;
 
     @Component
     public MavenProjectHelper helper;
@@ -140,9 +140,9 @@ public class JellydocMojo extends AbstractMojo implements MavenReport {
         Path docletPath = makePath(p, pluginArtifacts);
         try {
             Artifact self = factory.createArtifact("org.jvnet.maven-jellydoc-plugin", "maven-jellydoc-plugin", pluginVersion, null, "maven-plugin");
-            resolver.resolve(self,project.getPluginArtifactRepositories(),localRepository);
+            self = resolver.resolveArtifact(session.getProjectBuildingRequest(), self).getArtifact();
             docletPath.createPathElement().setLocation(self.getFile());
-        } catch (AbstractArtifactResolutionException e) {
+        } catch (ArtifactResolverException e) {
             throw new MojoExecutionException("Failed to resolve plugin from within itself",e);
         }
         d.setPath(docletPath);
