@@ -11,6 +11,12 @@
   <artifactId>jellydoc-annotations</artifactId>
   <name>Jellydoc annotations</name>
 
+  <properties>
+    <!-- TODO site generation broken for submodules -->
+    <maven.site.skip>true</maven.site.skip>
+    <maven.site.deploy.skip>true</maven.site.deploy.skip>
+  </properties>
+
   <distributionManagement>
     <site>
       <id>github.com</id>
