@@ -5,6 +5,9 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    ignore:
+      # Ignore 1.2.0-atlassian-2
+      - dependency-name: "jaxen:jaxen"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
