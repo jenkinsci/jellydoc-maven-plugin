@@ -65,7 +65,7 @@
 
   <properties>
     <maven.version>3.8.6</maven.version>
-    <maven-plugin-tools.version>3.6.4</maven-plugin-tools.version>
+    <maven-plugin-tools.version>3.7.0</maven-plugin-tools.version>
     <!-- TODO fix violations -->
     <spotbugs.threshold>High</spotbugs.threshold>
     <!-- TODO site generation broken for submodules -->
