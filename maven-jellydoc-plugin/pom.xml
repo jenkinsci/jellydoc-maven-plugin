@@ -4,7 +4,7 @@
   <parent>
     <groupId>org.jvnet.maven-jellydoc-plugin</groupId>
     <artifactId>jellydoc</artifactId>
-    <version>${revision}${changelist}</version>
+    <version>1.10</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
   <artifactId>maven-jellydoc-plugin</artifactId>
