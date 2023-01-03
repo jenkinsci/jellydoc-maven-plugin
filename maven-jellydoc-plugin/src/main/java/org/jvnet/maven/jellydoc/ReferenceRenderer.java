@@ -27,7 +27,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.HashSet;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.ArrayList;
 import java.io.StringWriter;
@@ -120,7 +119,7 @@ public class ReferenceRenderer extends AbstractMavenReportRenderer {
 
     private List<Element> sortByName(List<Element> list) {
         List<Element> tags = new ArrayList<>(list);
-        Collections.sort(tags,SORT_BY_NAME);
+        tags.sort(SORT_BY_NAME);
         return tags;
     }
 
