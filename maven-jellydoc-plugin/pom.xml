@@ -77,11 +77,6 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>commons-logging</groupId>
-        <artifactId>commons-logging</artifactId>
-        <version>1.2</version>
-      </dependency>
-      <dependency>
         <groupId>org.apache.maven</groupId>
         <artifactId>maven-artifact</artifactId>
         <version>${maven.version}</version>
@@ -146,17 +141,6 @@
       <version>1.10.12</version>
     </dependency>
     <dependency>
-      <groupId>org.apache.maven.doxia</groupId>
-      <artifactId>doxia-site-renderer</artifactId>
-      <version>1.11.1</version>
-      <exclusions>
-        <exclusion>
-          <groupId>dom4j</groupId>
-          <artifactId>dom4j</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
       <groupId>org.apache.maven.reporting</groupId>
       <artifactId>maven-reporting-impl</artifactId>
       <version>3.2.0</version>
@@ -185,11 +169,6 @@
     <dependency>
       <groupId>org.apache.maven</groupId>
       <artifactId>maven-core</artifactId>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.maven</groupId>
-      <artifactId>maven-model</artifactId>
       <scope>provided</scope>
     </dependency>
     <dependency>
