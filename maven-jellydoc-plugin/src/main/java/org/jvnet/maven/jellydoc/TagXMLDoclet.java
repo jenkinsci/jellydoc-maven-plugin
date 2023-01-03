@@ -82,7 +82,7 @@ public class TagXMLDoclet extends Doclet {
      * Generates the xml for the tag libraries
      */
     private void javadocXML(RootDoc root, Tags tw) throws SAXException {
-        Set<PackageDoc> pkgs = new HashSet<PackageDoc>();
+        Set<PackageDoc> pkgs = new HashSet<>();
         for (ClassDoc c : root.specifiedClasses())
             pkgs.add(c.containingPackage());
         pkgs.addAll(Arrays.asList(root.specifiedPackages()));
@@ -306,7 +306,7 @@ public class TagXMLDoclet extends Doclet {
         );
         parser.setContentHandler(
             new DefaultHandler() {
-                private Stack<TypedXmlWriter> w = new Stack<TypedXmlWriter>();
+                private Stack<TypedXmlWriter> w = new Stack<>();
                 { w.push(d); }
                 @Override
                 public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException {

@@ -124,7 +124,7 @@ public class ReferenceRenderer extends AbstractMavenReportRenderer {
     }
 
     private List<Element> sortByName(List<Element> list) {
-        List<Element> tags = new ArrayList<Element>(list);
+        List<Element> tags = new ArrayList<>(list);
         Collections.sort(tags,SORT_BY_NAME);
         return tags;
     }
@@ -230,5 +230,5 @@ public class ReferenceRenderer extends AbstractMavenReportRenderer {
         return w.toString();
     }
 
-    private static final Set<String> HIDDEN_ATTRIBUTES = new HashSet<String>(Arrays.asList("escapeText","trim"));
+    private static final Set<String> HIDDEN_ATTRIBUTES = new HashSet<>(Arrays.asList("escapeText","trim"));
 }
