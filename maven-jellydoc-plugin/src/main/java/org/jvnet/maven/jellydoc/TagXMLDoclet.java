@@ -82,7 +82,7 @@ public class TagXMLDoclet extends Doclet {
      * Generates the xml for the tag libraries
      */
     private void javadocXML(RootDoc root, Tags tw) throws SAXException {
-        Set<PackageDoc> pkgs = new HashSet<PackageDoc>();
+        Set<PackageDoc> pkgs = new HashSet<>();
         for (ClassDoc c : root.specifiedClasses())
             pkgs.add(c.containingPackage());
         pkgs.addAll(Arrays.asList(root.specifiedPackages()));
@@ -263,7 +263,7 @@ public class TagXMLDoclet extends Doclet {
                     String label = ((SeeTag) tag).label();
                     // if the label is null or empty, use the class#member part of the link
                     if (null == label || "".equals(label)) {
-                        StringBuffer buf = new StringBuffer();
+                        StringBuilder buf = new StringBuilder();
                         String className = ((SeeTag) tag).referencedClassName();
                         if ("".equals(className)) {
                             className = null;
@@ -306,18 +306,21 @@ public class TagXMLDoclet extends Doclet {
         );
         parser.setContentHandler(
             new DefaultHandler() {
-                private Stack<TypedXmlWriter> w = new Stack<TypedXmlWriter>();
+                private Stack<TypedXmlWriter> w = new Stack<>();
                 { w.push(d); }
+                @Override
                 public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException {
                     if ( validDocElementName( localName ) ) {
                         w.push(w.peek()._element(localName,TypedXmlWriter.class));
                     }
                 }
+                @Override
                 public void endElement(String namespaceURI, String localName, String qName) throws SAXException {
                     if ( validDocElementName( localName ) ) {
                         w.pop();
                     }
                 }
+                @Override
                 public void characters(char[] ch, int start, int length) throws SAXException {
                     w.peek()._pcdata(new String(ch,start,length));
                 }
@@ -383,7 +386,7 @@ public class TagXMLDoclet extends Doclet {
         return 0;
     }
 
-    public static boolean validOptions(String options[][],
+    public static boolean validOptions(String[][] options,
         DocErrorReporter reporter)
     {
         boolean foundEncodingOption = false;

@@ -21,7 +21,6 @@ import org.apache.maven.execution.MavenSession;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.AbstractMojoExecutionException;
 import org.apache.maven.plugin.MojoExecutionException;
-import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Component;
 import org.apache.maven.plugins.annotations.Execute;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
@@ -57,7 +56,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.FileOutputStream;
 import java.io.FileNotFoundException;
-import java.net.MalformedURLException;
 import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
@@ -111,7 +109,8 @@ public class JellydocMojo extends AbstractMojo implements MavenReport {
 
     private File outputDirectory;
 
-    public void execute() throws MojoExecutionException, MojoFailureException {
+    @Override
+    public void execute() throws MojoExecutionException {
         Project p = new Project();
 
         DefaultLogger logger = new DefaultLogger();
@@ -130,7 +129,7 @@ public class JellydocMojo extends AbstractMojo implements MavenReport {
             fs.setDir(new File(dir.toString()));
             javadoc.addFileset(fs);
         }
-        javadoc.setClasspath(makePath(p,(Collection<Artifact>)project.getArtifacts()));
+        javadoc.setClasspath(makePath(p,project.getArtifacts()));
 
         Javadoc.DocletInfo d = javadoc.createDoclet();
         d.setProject(p);
@@ -177,11 +176,7 @@ public class JellydocMojo extends AbstractMojo implements MavenReport {
 
                 helper.attachArtifact(project,"xsd","taglib-"+prefix,schema);
             }
-        } catch (TransformerException e) {
-            throw new MojoExecutionException("Failed to generate schema",e);
-        } catch (DocumentException e) {
-            throw new MojoExecutionException("Failed to generate schema",e);
-        } catch (FileNotFoundException e) {
+        } catch (TransformerException | FileNotFoundException | DocumentException e) {
             throw new MojoExecutionException("Failed to generate schema",e);
         }
     }
@@ -210,50 +205,53 @@ public class JellydocMojo extends AbstractMojo implements MavenReport {
 //        return src;
 //    }
 
+    @Override
     public void generate(Sink sink, Locale locale) throws MavenReportException {
         try {
             execute();
             new ReferenceRenderer(sink,new File(targetDir(),"taglib.xml").toURI().toURL()).render();
             FileUtils.copyDirectory(targetDir(),new File(targetDir(),"site"),"taglib-*.xsd",null);
-        } catch (AbstractMojoExecutionException e) {
-            throw new MavenReportException("Failed to generate report",e);
-        } catch (MalformedURLException e) {
-            throw new MavenReportException("Failed to generate report",e);
-        } catch (DocumentException e) {
-            throw new MavenReportException("Failed to generate report",e);
-        } catch (IOException e) {
+        } catch (AbstractMojoExecutionException | DocumentException | IOException e) {
             throw new MavenReportException("Failed to generate report",e);
         }
     }
 
+    @Override
     public String getOutputName() {
         return "jelly-taglib-ref";
     }
 
+    @Override
     public String getName(Locale locale) {
         return "Jelly taglib reference";
     }
 
+    @Override
     public String getCategoryName() {
         return CATEGORY_PROJECT_REPORTS;
     }
 
+    @Override
     public String getDescription(Locale locale) {
         return "Jelly taglib reference";
     }
 
+    @Override
     public void setReportOutputDirectory(File outputDirectory) {
         this.outputDirectory = outputDirectory;
     }
 
+    @Override
     public File getReportOutputDirectory() {
         return this.outputDirectory;
     }
 
+    @Override
     public boolean isExternalReport() {
         return false;
     }
 
+    @Override
     public boolean canGenerateReport() {
         // TODO: check if the current project has any source files
         return true;

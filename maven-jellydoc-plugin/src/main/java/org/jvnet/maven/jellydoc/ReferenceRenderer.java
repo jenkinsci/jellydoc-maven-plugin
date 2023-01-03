@@ -27,7 +27,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.HashSet;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.ArrayList;
 import java.io.StringWriter;
@@ -43,23 +42,21 @@ import net.java.textilej.parser.markup.confluence.ConfluenceDialect;
  */
 public class ReferenceRenderer extends AbstractMavenReportRenderer {
     private final Document taglibXml;
-    private static final Comparator<Element> SORT_BY_NAME = new Comparator<Element>() {
-            public int compare(Element o1, Element o2) {
-            return o1.attributeValue("name").compareTo(o2.attributeValue("name"));
-        }
-    };
+    private static final Comparator<Element> SORT_BY_NAME = Comparator.comparing(o -> o.attributeValue("name"));
 
     public ReferenceRenderer(Sink sink, URL taglibXml) throws DocumentException {
         super(sink);
         this.taglibXml = new SAXReader().read(taglibXml);
     }
 
+    @Override
     public String getTitle() {
         return "Jelly Taglib references";
     }
 
+    @Override
     protected void renderBody() {
-        List<Element> libraries = sortByName((List<Element>) taglibXml.getRootElement().elements("library"));
+        List<Element> libraries = sortByName(taglibXml.getRootElement().elements("library"));
 
         paragraph("The following Jelly tag libraries are defined in this project.");
 
@@ -89,7 +86,7 @@ public class ReferenceRenderer extends AbstractMavenReportRenderer {
             paragraphHtml("This tag library is <a href='taglib-"+prefix+".xsd'>also available as an XML Schema</a>");
             renderSummaryTable(library,prefix);
 
-            for( Element tag : sortByName((List<Element>)library.elements("tag")))
+            for( Element tag : sortByName(library.elements("tag")))
                 renderTagReference(prefix,tag);
 
             endSection();
@@ -106,7 +103,7 @@ public class ReferenceRenderer extends AbstractMavenReportRenderer {
         startTable();
         tableHeader(new String[]{"Tag Name","Description"});
 
-        List<Element> tags = sortByName((List<Element>) library.elements("tag"));
+        List<Element> tags = sortByName(library.elements("tag"));
 
         for( Element tag : tags) {
             sink.tableRow();
@@ -121,8 +118,8 @@ public class ReferenceRenderer extends AbstractMavenReportRenderer {
     }
 
     private List<Element> sortByName(List<Element> list) {
-        List<Element> tags = new ArrayList<Element>(list);
-        Collections.sort(tags,SORT_BY_NAME);
+        List<Element> tags = new ArrayList<>(list);
+        tags.sort(SORT_BY_NAME);
         return tags;
     }
 
@@ -138,7 +135,7 @@ public class ReferenceRenderer extends AbstractMavenReportRenderer {
         if(hasVisibleAttributes(tag)) {
             startTable();
             tableHeader(new String[]{"Attribute Name","Type","Description"});
-            for( Element att : sortByName((List<Element>)tag.elements("attribute")))
+            for( Element att : sortByName(tag.elements("attribute")))
                 renderAttribute(att);
             endTable();
         }
@@ -157,7 +154,7 @@ public class ReferenceRenderer extends AbstractMavenReportRenderer {
     }
 
     private boolean hasVisibleAttributes(Element tag) {
-        for( Element att : (List<Element>)tag.elements("attribute")) {
+        for( Element att : tag.elements("attribute")) {
             String name = att.attributeValue("name");
             if(!HIDDEN_ATTRIBUTES.contains(name))
                 return true; 
@@ -227,5 +224,5 @@ public class ReferenceRenderer extends AbstractMavenReportRenderer {
         return w.toString();
     }
 
-    private static final Set<String> HIDDEN_ATTRIBUTES = new HashSet<String>(Arrays.asList("escapeText","trim"));
+    private static final Set<String> HIDDEN_ATTRIBUTES = new HashSet<>(Arrays.asList("escapeText","trim"));
 }
