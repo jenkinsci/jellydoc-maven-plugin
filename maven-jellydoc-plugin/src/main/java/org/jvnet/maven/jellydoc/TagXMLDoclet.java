@@ -386,7 +386,7 @@ public class TagXMLDoclet extends Doclet {
         return 0;
     }
 
-    public static boolean validOptions(String options[][],
+    public static boolean validOptions(String[][] options,
         DocErrorReporter reporter)
     {
         boolean foundEncodingOption = false;
