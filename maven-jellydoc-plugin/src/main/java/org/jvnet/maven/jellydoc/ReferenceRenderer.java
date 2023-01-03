@@ -43,12 +43,7 @@ import net.java.textilej.parser.markup.confluence.ConfluenceDialect;
  */
 public class ReferenceRenderer extends AbstractMavenReportRenderer {
     private final Document taglibXml;
-    private static final Comparator<Element> SORT_BY_NAME = new Comparator<Element>() {
-            @Override
-            public int compare(Element o1, Element o2) {
-            return o1.attributeValue("name").compareTo(o2.attributeValue("name"));
-        }
-    };
+    private static final Comparator<Element> SORT_BY_NAME = Comparator.comparing(o -> o.attributeValue("name"));
 
     public ReferenceRenderer(Sink sink, URL taglibXml) throws DocumentException {
         super(sink);
