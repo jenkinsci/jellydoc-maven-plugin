@@ -56,7 +56,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.FileOutputStream;
 import java.io.FileNotFoundException;
-import java.net.MalformedURLException;
 import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
@@ -177,11 +176,7 @@ public class JellydocMojo extends AbstractMojo implements MavenReport {
 
                 helper.attachArtifact(project,"xsd","taglib-"+prefix,schema);
             }
-        } catch (TransformerException e) {
-            throw new MojoExecutionException("Failed to generate schema",e);
-        } catch (DocumentException e) {
-            throw new MojoExecutionException("Failed to generate schema",e);
-        } catch (FileNotFoundException e) {
+        } catch (TransformerException | FileNotFoundException | DocumentException e) {
             throw new MojoExecutionException("Failed to generate schema",e);
         }
     }
@@ -216,13 +211,7 @@ public class JellydocMojo extends AbstractMojo implements MavenReport {
             execute();
             new ReferenceRenderer(sink,new File(targetDir(),"taglib.xml").toURI().toURL()).render();
             FileUtils.copyDirectory(targetDir(),new File(targetDir(),"site"),"taglib-*.xsd",null);
-        } catch (AbstractMojoExecutionException e) {
-            throw new MavenReportException("Failed to generate report",e);
-        } catch (MalformedURLException e) {
-            throw new MavenReportException("Failed to generate report",e);
-        } catch (DocumentException e) {
-            throw new MavenReportException("Failed to generate report",e);
-        } catch (IOException e) {
+        } catch (AbstractMojoExecutionException | DocumentException | IOException e) {
             throw new MavenReportException("Failed to generate report",e);
         }
     }
