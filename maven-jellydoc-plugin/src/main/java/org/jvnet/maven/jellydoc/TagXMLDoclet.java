@@ -263,7 +263,7 @@ public class TagXMLDoclet extends Doclet {
                     String label = ((SeeTag) tag).label();
                     // if the label is null or empty, use the class#member part of the link
                     if (null == label || "".equals(label)) {
-                        StringBuffer buf = new StringBuffer();
+                        StringBuilder buf = new StringBuilder();
                         String className = ((SeeTag) tag).referencedClassName();
                         if ("".equals(className)) {
                             className = null;
