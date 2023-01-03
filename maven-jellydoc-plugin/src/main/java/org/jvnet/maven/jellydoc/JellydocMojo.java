@@ -17,6 +17,8 @@ package org.jvnet.maven.jellydoc;
 
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.artifact.factory.ArtifactFactory;
+import org.apache.maven.doxia.sink.Sink;
+import org.apache.maven.doxia.sink.SinkFactory;
 import org.apache.maven.execution.MavenSession;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.AbstractMojoExecutionException;
@@ -29,7 +31,7 @@ import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.plugins.annotations.ResolutionScope;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.project.MavenProjectHelper;
-import org.apache.maven.reporting.MavenReport;
+import org.apache.maven.reporting.MavenMultiPageReport;
 import org.apache.maven.reporting.MavenReportException;
 import org.apache.maven.shared.transfer.artifact.resolve.ArtifactResolver;
 import org.apache.maven.shared.transfer.artifact.resolve.ArtifactResolverException;
@@ -38,7 +40,6 @@ import org.apache.tools.ant.Project;
 import org.apache.tools.ant.taskdefs.Javadoc;
 import org.apache.tools.ant.types.FileSet;
 import org.apache.tools.ant.types.Path;
-import org.codehaus.doxia.sink.Sink;
 import org.codehaus.plexus.util.FileUtils;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
@@ -67,7 +68,7 @@ import java.util.Locale;
  */
 @Mojo(name = "jellydoc", requiresDependencyResolution = ResolutionScope.COMPILE)
 @Execute(phase = LifecyclePhase.GENERATE_SOURCES)
-public class JellydocMojo extends AbstractMojo implements MavenReport {
+public class JellydocMojo extends AbstractMojo implements MavenMultiPageReport {
     /**
      * The Maven Project Object
      */
@@ -205,8 +206,43 @@ public class JellydocMojo extends AbstractMojo implements MavenReport {
 //        return src;
 //    }
 
+    /**
+     * Generate a report.
+     *
+     * @param sink The sink to use for the generation.
+     * @param locale The desired locale in which to generate the report; could be null.
+     * @throws MavenReportException if any error occurs
+     * @deprecated use {@link #generate(Sink, SinkFactory, Locale)} instead.
+     */
+    @Deprecated
     @Override
+    public void generate(org.codehaus.doxia.sink.Sink sink, Locale locale) throws MavenReportException {
+        generate(sink, null, locale);
+    }
+
+    /**
+     * Generate a report.
+     *
+     * @param sink The sink to use for the generation.
+     * @param locale The desired locale in which to generate the report; could be null.
+     * @throws MavenReportException if any error occurs
+     * @deprecated use {@link #generate(Sink, SinkFactory, Locale)} instead.
+     */
+    @Deprecated
     public void generate(Sink sink, Locale locale) throws MavenReportException {
+        generate(sink, null, locale);
+    }
+
+    /**
+     * This method is called when the report generation is invoked by maven-site-plugin.
+     *
+     * @param sink The sink to use for the generation.
+     * @param sinkFactory The sink factory to use for the generation; could be null.
+     * @param locale The desired locale in which to generate the report; could be null.
+     * @throws MavenReportException if any error occurs
+     */
+    @Override
+    public void generate(Sink sink, SinkFactory sinkFactory, Locale locale) throws MavenReportException {
         try {
             execute();
             new ReferenceRenderer(sink,new File(targetDir(),"taglib.xml").toURI().toURL()).render();

@@ -15,12 +15,12 @@
  */
 package org.jvnet.maven.jellydoc;
 
+import org.apache.maven.doxia.sink.Sink;
 import org.apache.maven.reporting.AbstractMavenReportRenderer;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
-import org.codehaus.doxia.sink.Sink;
 
 import java.net.URL;
 import java.util.List;
