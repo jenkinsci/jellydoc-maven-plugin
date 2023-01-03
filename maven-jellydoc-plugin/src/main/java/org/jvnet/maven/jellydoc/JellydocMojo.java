@@ -111,6 +111,7 @@ public class JellydocMojo extends AbstractMojo implements MavenReport {
 
     private File outputDirectory;
 
+    @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
         Project p = new Project();
 
@@ -210,6 +211,7 @@ public class JellydocMojo extends AbstractMojo implements MavenReport {
 //        return src;
 //    }
 
+    @Override
     public void generate(Sink sink, Locale locale) throws MavenReportException {
         try {
             execute();
@@ -226,34 +228,42 @@ public class JellydocMojo extends AbstractMojo implements MavenReport {
         }
     }
 
+    @Override
     public String getOutputName() {
         return "jelly-taglib-ref";
     }
 
+    @Override
     public String getName(Locale locale) {
         return "Jelly taglib reference";
     }
 
+    @Override
     public String getCategoryName() {
         return CATEGORY_PROJECT_REPORTS;
     }
 
+    @Override
     public String getDescription(Locale locale) {
         return "Jelly taglib reference";
     }
 
+    @Override
     public void setReportOutputDirectory(File outputDirectory) {
         this.outputDirectory = outputDirectory;
     }
 
+    @Override
     public File getReportOutputDirectory() {
         return this.outputDirectory;
     }
 
+    @Override
     public boolean isExternalReport() {
         return false;
     }
 
+    @Override
     public boolean canGenerateReport() {
         // TODO: check if the current project has any source files
         return true;

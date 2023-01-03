@@ -308,16 +308,19 @@ public class TagXMLDoclet extends Doclet {
             new DefaultHandler() {
                 private Stack<TypedXmlWriter> w = new Stack<TypedXmlWriter>();
                 { w.push(d); }
+                @Override
                 public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException {
                     if ( validDocElementName( localName ) ) {
                         w.push(w.peek()._element(localName,TypedXmlWriter.class));
                     }
                 }
+                @Override
                 public void endElement(String namespaceURI, String localName, String qName) throws SAXException {
                     if ( validDocElementName( localName ) ) {
                         w.pop();
                     }
                 }
+                @Override
                 public void characters(char[] ch, int start, int length) throws SAXException {
                     w.peek()._pcdata(new String(ch,start,length));
                 }

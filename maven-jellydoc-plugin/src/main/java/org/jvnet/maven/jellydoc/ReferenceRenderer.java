@@ -44,6 +44,7 @@ import net.java.textilej.parser.markup.confluence.ConfluenceDialect;
 public class ReferenceRenderer extends AbstractMavenReportRenderer {
     private final Document taglibXml;
     private static final Comparator<Element> SORT_BY_NAME = new Comparator<Element>() {
+            @Override
             public int compare(Element o1, Element o2) {
             return o1.attributeValue("name").compareTo(o2.attributeValue("name"));
         }
@@ -54,10 +55,12 @@ public class ReferenceRenderer extends AbstractMavenReportRenderer {
         this.taglibXml = new SAXReader().read(taglibXml);
     }
 
+    @Override
     public String getTitle() {
         return "Jelly Taglib references";
     }
 
+    @Override
     protected void renderBody() {
         List<Element> libraries = sortByName((List<Element>) taglibXml.getRootElement().elements("library"));
 
