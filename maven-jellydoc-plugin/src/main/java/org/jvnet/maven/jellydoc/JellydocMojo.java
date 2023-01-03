@@ -131,7 +131,7 @@ public class JellydocMojo extends AbstractMojo implements MavenReport {
             fs.setDir(new File(dir.toString()));
             javadoc.addFileset(fs);
         }
-        javadoc.setClasspath(makePath(p,(Collection<Artifact>)project.getArtifacts()));
+        javadoc.setClasspath(makePath(p,project.getArtifacts()));
 
         Javadoc.DocletInfo d = javadoc.createDoclet();
         d.setProject(p);

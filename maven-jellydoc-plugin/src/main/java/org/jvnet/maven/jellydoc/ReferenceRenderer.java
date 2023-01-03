@@ -62,7 +62,7 @@ public class ReferenceRenderer extends AbstractMavenReportRenderer {
 
     @Override
     protected void renderBody() {
-        List<Element> libraries = sortByName((List<Element>) taglibXml.getRootElement().elements("library"));
+        List<Element> libraries = sortByName(taglibXml.getRootElement().elements("library"));
 
         paragraph("The following Jelly tag libraries are defined in this project.");
 
@@ -92,7 +92,7 @@ public class ReferenceRenderer extends AbstractMavenReportRenderer {
             paragraphHtml("This tag library is <a href='taglib-"+prefix+".xsd'>also available as an XML Schema</a>");
             renderSummaryTable(library,prefix);
 
-            for( Element tag : sortByName((List<Element>)library.elements("tag")))
+            for( Element tag : sortByName(library.elements("tag")))
                 renderTagReference(prefix,tag);
 
             endSection();
@@ -109,7 +109,7 @@ public class ReferenceRenderer extends AbstractMavenReportRenderer {
         startTable();
         tableHeader(new String[]{"Tag Name","Description"});
 
-        List<Element> tags = sortByName((List<Element>) library.elements("tag"));
+        List<Element> tags = sortByName(library.elements("tag"));
 
         for( Element tag : tags) {
             sink.tableRow();
@@ -141,7 +141,7 @@ public class ReferenceRenderer extends AbstractMavenReportRenderer {
         if(hasVisibleAttributes(tag)) {
             startTable();
             tableHeader(new String[]{"Attribute Name","Type","Description"});
-            for( Element att : sortByName((List<Element>)tag.elements("attribute")))
+            for( Element att : sortByName(tag.elements("attribute")))
                 renderAttribute(att);
             endTable();
         }
@@ -160,7 +160,7 @@ public class ReferenceRenderer extends AbstractMavenReportRenderer {
     }
 
     private boolean hasVisibleAttributes(Element tag) {
-        for( Element att : (List<Element>)tag.elements("attribute")) {
+        for( Element att : tag.elements("attribute")) {
             String name = att.attributeValue("name");
             if(!HIDDEN_ATTRIBUTES.contains(name))
                 return true; 
