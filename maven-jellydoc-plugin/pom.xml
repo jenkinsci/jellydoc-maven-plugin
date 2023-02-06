@@ -64,7 +64,7 @@
   </build>
 
   <properties>
-    <maven.version>3.8.7</maven.version>
+    <maven.version>3.9.0</maven.version>
     <plexus.version>2.1.1</plexus.version>
     <maven-plugin-tools.version>3.7.1</maven-plugin-tools.version>
     <!-- TODO fix violations -->
