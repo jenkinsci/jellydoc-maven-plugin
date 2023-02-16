@@ -30,6 +30,8 @@
               <rules>
                 <requireUpperBoundDeps>
                   <excludes combine.children="append">
+                    <exclude>org.apache.commons:commons-lang3</exclude>
+                    <exclude>org.slf4j:slf4j-api</exclude>
                     <exclude>xerces:xercesImpl</exclude>
                   </excludes>
                 </requireUpperBoundDeps>
@@ -206,7 +208,7 @@
         <dependency>
           <groupId>com.sun</groupId>
           <artifactId>tools</artifactId>
-          <version>1.5</version>
+          <version>1.8.0</version>
           <scope>system</scope>
           <systemPath>${java.home}/../lib/tools.jar</systemPath>
         </dependency>
