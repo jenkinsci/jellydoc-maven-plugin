@@ -66,7 +66,7 @@
   </build>
 
   <properties>
-    <maven.version>3.9.0</maven.version>
+    <maven.version>3.8.1</maven.version>
     <plexus.version>2.1.1</plexus.version>
     <maven-plugin-tools.version>3.8.1</maven-plugin-tools.version>
     <!-- TODO fix violations -->
@@ -75,6 +75,10 @@
     <maven.site.skip>true</maven.site.skip>
     <maven.site.deploy.skip>true</maven.site.deploy.skip>
   </properties>
+
+  <prerequisites>
+      <maven>${maven.version}</maven>
+  </prerequisites>
 
   <dependencyManagement>
     <dependencies>
