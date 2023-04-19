@@ -131,6 +131,9 @@
       <activation>
         <jdk>(,1.8]</jdk>
       </activation>
+      <properties>
+        <spotless-maven-plugin.version>2.29.0</spotless-maven-plugin.version>
+      </properties>
       <build>
         <pluginManagement>
           <plugins>
