@@ -4,7 +4,7 @@
   <parent>
     <groupId>org.jenkins-ci</groupId>
     <artifactId>jenkins</artifactId>
-    <version>1.97</version>
+    <version>1.98</version>
     <relativePath />
   </parent>
 
@@ -131,6 +131,9 @@
       <activation>
         <jdk>(,1.8]</jdk>
       </activation>
+      <properties>
+        <spotless-maven-plugin.version>2.29.0</spotless-maven-plugin.version>
+      </properties>
       <build>
         <pluginManagement>
           <plugins>
