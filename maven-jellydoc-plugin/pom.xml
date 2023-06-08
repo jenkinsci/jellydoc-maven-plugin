@@ -71,9 +71,6 @@
     <maven-plugin-tools.version>3.9.0</maven-plugin-tools.version>
     <!-- TODO fix violations -->
     <spotbugs.threshold>High</spotbugs.threshold>
-    <!-- TODO site generation broken for submodules -->
-    <maven.site.skip>true</maven.site.skip>
-    <maven.site.deploy.skip>true</maven.site.deploy.skip>
   </properties>
 
   <prerequisites>
@@ -225,17 +222,17 @@
     </profile>
   </profiles>
 
-  <distributionManagement>
-    <site>
-      <id>github.com</id>
-      <url>gitsite:git@github.com/${gitHubRepo}.git/maven-jellydoc-plugin/</url>
-    </site>
-  </distributionManagement>
-
   <reporting>
     <plugins>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-plugin-plugin</artifactId>
+        <version>${maven-plugin-tools.version}</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-plugin-report-plugin</artifactId>
+        <version>${maven-plugin-tools.version}</version>
       </plugin>
     </plugins>
   </reporting>
