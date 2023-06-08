@@ -1,10 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project>
+<project name="Maven jellydoc plugin">
+  <skin>
+    <groupId>org.apache.maven.skins</groupId>
+    <artifactId>maven-fluido-skin</artifactId>
+    <version>1.10.0</version>
+  </skin>
+
   <body>
     <menu name="Overview">
+      <item name="Introduction" href="index.html"/>
       <item name="Goals" href="plugin-info.html">
         <item name="jellydoc:jellydoc" href="jellydoc-mojo.html"/>
       </item>
     </menu>
+    <menu ref="reports" inherit="bottom"/>
   </body>
+
+  <custom>
+    <fluidoSkin>
+      <sourceLineNumbersEnabled>true</sourceLineNumbersEnabled>
+      <gitHub>
+        <projectId>jenkinsci/maven-jellydoc-plugin</projectId>
+        <ribbonOrientation>right</ribbonOrientation>
+        <ribbonColor>orange</ribbonColor>
+      </gitHub>
+    </fluidoSkin>
+  </custom>
 </project>
