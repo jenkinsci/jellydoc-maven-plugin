@@ -4,6 +4,7 @@
     "config:base",
     ":semanticCommitsDisabled"
   ],
+  "enabledManagers": ["regex"],
   "regexManagers": [
     {
       "fileMatch": ["maven-jellydoc-plugin/src/site/site.xml"],
