@@ -3,7 +3,7 @@
                                     ------
                                     ------
 
-  <<<maven-jellydoc-plugin>>> is a Maven2 plugin for generating taglib documentation for {{{http://commons.apache.org/jelly/}Apache Commons Jelly}} from Java source code. In addition, this tool also has the following features:
+  <<<jellydoc-maven-plugin>>> is a Maven2 plugin for generating taglib documentation for {{{http://commons.apache.org/jelly/}Apache Commons Jelly}} from Java source code. In addition, this tool also has the following features:
   
   * Generating XML Schema for taglib, which in turn can be used in schema-aware editors
   
@@ -17,8 +17,8 @@
 <reporting>
   <plugins>
     <plugin>
-      <groupId>org.jvnet.maven-jellydoc-plugin</groupId>
-      <artifactId>maven-jellydoc-plugin</artifactId>
+      <groupId>io.jenkins.tools.maven</groupId>
+      <artifactId>jellydoc-maven-plugin</artifactId>
     </plugin>
   </plugins>
 </reporting>
@@ -35,8 +35,8 @@
 <build>
   <plugins>
     <plugin>
-      <groupId>org.jvnet.maven-jellydoc-plugin</groupId>
-      <artifactId>maven-jellydoc-plugin</artifactId>
+      <groupId>io.jenkins.tools.maven</groupId>
+      <artifactId>jellydoc-maven-plugin</artifactId>
       <executions>
         <execution>
           <goals>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="Maven jellydoc plugin">
+<project name="Jellydoc Maven plugin">
   <skin>
     <groupId>org.apache.maven.skins</groupId>
     <artifactId>maven-fluido-skin</artifactId>
@@ -20,7 +20,7 @@
     <fluidoSkin>
       <sourceLineNumbersEnabled>true</sourceLineNumbersEnabled>
       <gitHub>
-        <projectId>jenkinsci/maven-jellydoc-plugin</projectId>
+        <projectId>jenkinsci/jellydoc-maven-plugin</projectId>
         <ribbonOrientation>right</ribbonOrientation>
         <ribbonColor>orange</ribbonColor>
       </gitHub>

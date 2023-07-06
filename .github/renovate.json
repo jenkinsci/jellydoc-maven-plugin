@@ -7,7 +7,7 @@
   "enabledManagers": ["regex"],
   "regexManagers": [
     {
-      "fileMatch": ["maven-jellydoc-plugin/src/site/site.xml"],
+      "fileMatch": ["jellydoc-maven-plugin/src/site/site.xml"],
       "matchStrings": ["<version>(?<currentValue>.*?)<\/version>"],
       "depNameTemplate": "org.apache.maven.skins:maven-fluido-skin",
       "datasourceTemplate": "maven"
