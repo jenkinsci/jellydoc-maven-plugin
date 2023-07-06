@@ -139,7 +139,7 @@ public class JellydocMojo extends AbstractMojo implements MavenMultiPageReport {
 
         Path docletPath = makePath(p, pluginArtifacts);
         try {
-            Artifact self = factory.createArtifact("org.jvnet.maven-jellydoc-plugin", "maven-jellydoc-plugin", pluginVersion, null, "maven-plugin");
+            Artifact self = factory.createArtifact("io.jenkins.tools.maven", "jellydoc-maven-plugin", pluginVersion, null, "maven-plugin");
             self = resolver.resolveArtifact(session.getProjectBuildingRequest(), self).getArtifact();
             docletPath.createPathElement().setLocation(self.getFile());
         } catch (ArtifactResolverException e) {
