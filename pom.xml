@@ -10,7 +10,7 @@
 
   <groupId>io.jenkins.tools.maven</groupId>
   <artifactId>jellydoc</artifactId>
-  <version>${revision}${changelist}</version>
+  <version>${changelist}</version>
   <packaging>pom</packaging>
 
   <name>Jellydoc</name>
@@ -33,8 +33,7 @@
   </licenses>
 
   <properties>
-    <revision>1.12</revision>
-    <changelist>-SNAPSHOT</changelist>
+    <changelist>999999-SNAPSHOT</changelist>
     <gitHubRepo>jenkinsci/jellydoc-maven-plugin</gitHubRepo>
   </properties>
 
