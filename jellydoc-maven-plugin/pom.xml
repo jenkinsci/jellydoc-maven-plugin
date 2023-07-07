@@ -4,7 +4,7 @@
   <parent>
     <groupId>io.jenkins.tools.maven</groupId>
     <artifactId>jellydoc</artifactId>
-    <version>${revision}${changelist}</version>
+    <version>${changelist}</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
   <artifactId>jellydoc-maven-plugin</artifactId>
