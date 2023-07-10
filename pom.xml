@@ -79,7 +79,7 @@
 
   <modules>
     <module>jellydoc-maven-plugin</module>
-    <module>annotation</module>
+    <module>jellydoc-annotations</module>
     <module>taglib-xml-writer</module>
   </modules>
 
