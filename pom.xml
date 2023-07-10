@@ -35,6 +35,8 @@
   <properties>
     <changelist>999999-SNAPSHOT</changelist>
     <gitHubRepo>jenkinsci/jellydoc-maven-plugin</gitHubRepo>
+    <!-- TODO Remove when we start requiring Java 11. Note that we don't support Java 11 at all yet. -->
+    <incrementals-plugin.version>1.6</incrementals-plugin.version>
   </properties>
 
   <repositories>
