@@ -133,7 +133,7 @@ public class TagXMLDoclet extends Doclet {
 
         // generate tags
         for (ClassDoc c : classArray) {
-            if (isTag(c)) {
+            if (isTag(c) && !c.isAbstract()) {
                 tagXML(c,library.tag());
             }
         }
@@ -174,10 +174,6 @@ public class TagXMLDoclet extends Doclet {
      * Generates doc for a tag
      */
     private void tagXML(ClassDoc classDoc, org.jvnet.maven.jellydoc.Tag tag) throws SAXException {
-        if (classDoc.isAbstract()) {
-            return;
-        }
-
         tag.className(classDoc.name());
         String name = classDoc.name();
         if ( name.endsWith( "Tag" ) ) {
