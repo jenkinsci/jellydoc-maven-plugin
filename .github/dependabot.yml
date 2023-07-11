@@ -8,9 +8,6 @@ updates:
     ignore:
       # maven core artifacts are provided by the running maven, do not update to prevent consuming something unavailable
       - dependency-name: "org.apache.maven:*"
-      # 1.7 and later require Java 11, which this repository does not yet support
-      - dependency-name: "io.jenkins.tools.incrementals:git-changelist-maven-extension"
-        versions: [">=1.7"]
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:

@@ -35,8 +35,6 @@
   <properties>
     <changelist>999999-SNAPSHOT</changelist>
     <gitHubRepo>jenkinsci/jellydoc-maven-plugin</gitHubRepo>
-    <!-- TODO Remove when we start requiring Java 11. Note that we don't support Java 11 at all yet. -->
-    <incrementals-plugin.version>1.6</incrementals-plugin.version>
   </properties>
 
   <repositories>
@@ -53,95 +51,9 @@
     </pluginRepository>
   </pluginRepositories>
 
-  <build>
-    <plugins>
-      <!-- TODO Remove when we start requiring Java 11. Note that we don't support Java 11 at all yet. -->
-      <plugin>
-        <artifactId>maven-enforcer-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>display-info</id>
-            <configuration>
-              <rules>
-                <requireJavaVersion>
-                  <version>[1.8.0,]</version>
-                </requireJavaVersion>
-                <enforceBytecodeVersion>
-                  <maxJdkVersion>1.8</maxJdkVersion>
-                </enforceBytecodeVersion>
-              </rules>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
-
   <modules>
     <module>jellydoc-maven-plugin</module>
     <module>jellydoc-annotations</module>
     <module>taglib-xml-writer</module>
   </modules>
-
-  <!-- TODO Remove when we start requiring Java 11. Note that we don't support Java 11 at all yet. -->
-  <profiles>
-    <profile>
-      <id>jdk-9-and-above</id>
-      <activation>
-        <jdk>[9,)</jdk>
-      </activation>
-      <build>
-        <pluginManagement>
-          <plugins>
-            <plugin>
-              <artifactId>maven-compiler-plugin</artifactId>
-              <configuration>
-                <release>8</release>
-                <testRelease>8</testRelease>
-              </configuration>
-            </plugin>
-            <plugin>
-              <artifactId>maven-javadoc-plugin</artifactId>
-              <configuration>
-                <release>8</release>
-              </configuration>
-            </plugin>
-          </plugins>
-        </pluginManagement>
-      </build>
-    </profile>
-    <profile>
-      <id>jdk-8-and-below</id>
-      <activation>
-        <jdk>(,1.8]</jdk>
-      </activation>
-      <properties>
-        <spotless-maven-plugin.version>2.29.0</spotless-maven-plugin.version>
-      </properties>
-      <build>
-        <pluginManagement>
-          <plugins>
-            <plugin>
-              <artifactId>maven-compiler-plugin</artifactId>
-              <configuration>
-                <source>1.8</source>
-                <target>1.8</target>
-                <testSource>1.8</testSource>
-                <testTarget>1.8</testTarget>
-                <release combine.self="override" />
-                <testRelease combine.self="override" />
-              </configuration>
-            </plugin>
-            <plugin>
-              <artifactId>maven-javadoc-plugin</artifactId>
-              <configuration>
-                <source>1.8</source>
-                <release combine.self="override" />
-              </configuration>
-            </plugin>
-          </plugins>
-        </pluginManagement>
-      </build>
-    </profile>
-  </profiles>
 </project>
