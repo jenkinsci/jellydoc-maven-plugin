@@ -159,7 +159,7 @@ public class JellydocMojo extends AbstractMojo implements MavenMultiPageReport {
         d.setPath(docletPath);
 
         // debug support
-//        javadoc.createArg().setLine("-J-Xrunjdwp:transport=dt_socket,server=y,address=8000");
+//        javadoc.createArg().setLine("-J-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:8000");
 
         javadoc.execute();
 
