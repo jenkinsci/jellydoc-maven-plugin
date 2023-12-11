@@ -15,25 +15,23 @@
  */
 package org.jvnet.maven.jellydoc;
 
+import java.io.StringWriter;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import net.java.textilej.parser.MarkupParser;
+import net.java.textilej.parser.builder.HtmlDocumentBuilder;
+import net.java.textilej.parser.markup.confluence.ConfluenceDialect;
 import org.apache.maven.doxia.sink.Sink;
 import org.apache.maven.reporting.AbstractMavenReportRenderer;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
-
-import java.net.URL;
-import java.util.List;
-import java.util.Set;
-import java.util.HashSet;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.ArrayList;
-import java.io.StringWriter;
-
-import net.java.textilej.parser.MarkupParser;
-import net.java.textilej.parser.builder.HtmlDocumentBuilder;
-import net.java.textilej.parser.markup.confluence.ConfluenceDialect;
 
 /**
  * Generates a Maven report from {@code taglib.xml}.
@@ -60,16 +58,14 @@ public class ReferenceRenderer extends AbstractMavenReportRenderer {
 
         paragraph("The following Jelly tag libraries are defined in this project.");
 
-        if(libraries.size()>1) {
+        if (libraries.size() > 1) {
             startTable();
-            tableHeader(new String[]{"Namespace URI","Description"});
+            tableHeader(new String[] {"Namespace URI", "Description"});
             for (Element library : libraries) {
                 sink.tableRow();
                 sink.tableCell();
-                sink.rawText(String.format("<a href='#%s'>%s</a>",
-                        library.attributeValue("prefix"),
-                        library.attributeValue("uri")
-                        ));
+                sink.rawText(String.format(
+                        "<a href='#%s'>%s</a>", library.attributeValue("prefix"), library.attributeValue("uri")));
                 sink.tableCell_();
                 docCell(library);
                 sink.tableRow_();
@@ -77,17 +73,19 @@ public class ReferenceRenderer extends AbstractMavenReportRenderer {
             endTable();
         }
 
-        for( Element library : libraries) {
+        for (Element library : libraries) {
             String prefix = library.attributeValue("prefix");
 
             anchor(prefix);
             startSection(library.attributeValue("uri"));
             doc(library);
-            paragraphHtml("This tag library is <a href='taglib-"+prefix+".xsd'>also available as an XML Schema</a>");
-            renderSummaryTable(library,prefix);
+            paragraphHtml(
+                    "This tag library is <a href='taglib-" + prefix + ".xsd'>also available as an XML Schema</a>");
+            renderSummaryTable(library, prefix);
 
-            for( Element tag : sortByName(library.elements("tag")))
-                renderTagReference(prefix,tag);
+            for (Element tag : sortByName(library.elements("tag"))) {
+                renderTagReference(prefix, tag);
+            }
 
             endSection();
         }
@@ -101,15 +99,15 @@ public class ReferenceRenderer extends AbstractMavenReportRenderer {
 
     private void renderSummaryTable(Element library, String prefix) {
         startTable();
-        tableHeader(new String[]{"Tag Name","Description"});
+        tableHeader(new String[] {"Tag Name", "Description"});
 
         List<Element> tags = sortByName(library.elements("tag"));
 
-        for( Element tag : tags) {
+        for (Element tag : tags) {
             sink.tableRow();
             sink.tableCell();
             String name = tag.attributeValue("name");
-            sink.rawText("<a href='#"+prefix+':'+ name+"'>"+name+"</a>");
+            sink.rawText("<a href='#" + prefix + ':' + name + "'>" + name + "</a>");
             sink.tableCell_();
             docCell(tag);
             sink.tableRow_();
@@ -126,25 +124,26 @@ public class ReferenceRenderer extends AbstractMavenReportRenderer {
     /**
      * Generates a documentation for one tag.
      */
-    private void renderTagReference(String taglibPrefix,Element tag) {
+    private void renderTagReference(String taglibPrefix, Element tag) {
         String name = tag.attributeValue("name");
-        anchor(taglibPrefix +':'+ name);
+        anchor(taglibPrefix + ':' + name);
         startSection(name);
         doc(tag);
 
-        if(hasVisibleAttributes(tag)) {
+        if (hasVisibleAttributes(tag)) {
             startTable();
-            tableHeader(new String[]{"Attribute Name","Type","Description"});
-            for( Element att : sortByName(tag.elements("attribute")))
+            tableHeader(new String[] {"Attribute Name", "Type", "Description"});
+            for (Element att : sortByName(tag.elements("attribute"))) {
                 renderAttribute(att);
+            }
             endTable();
         }
         // renders description of the body
-        if(tag.attributeValue("no-content","false").equals("true"))
+        if (tag.attributeValue("no-content", "false").equals("true")) {
             paragraph("This tag does not accept any child elements/text.");
-        else {
+        } else {
             Element body = tag.element("body");
-            if(body!=null) {
+            if (body != null) {
                 startSection("body");
                 doc(body);
                 endSection();
@@ -154,10 +153,11 @@ public class ReferenceRenderer extends AbstractMavenReportRenderer {
     }
 
     private boolean hasVisibleAttributes(Element tag) {
-        for( Element att : tag.elements("attribute")) {
+        for (Element att : tag.elements("attribute")) {
             String name = att.attributeValue("name");
-            if(!HIDDEN_ATTRIBUTES.contains(name))
-                return true; 
+            if (!HIDDEN_ATTRIBUTES.contains(name)) {
+                return true;
+            }
         }
         return false;
     }
@@ -172,16 +172,19 @@ public class ReferenceRenderer extends AbstractMavenReportRenderer {
      */
     private void renderAttribute(Element att) {
         String name = att.attributeValue("name");
-        if(HIDDEN_ATTRIBUTES.contains(name))
+        if (HIDDEN_ATTRIBUTES.contains(name)) {
             return; // defined in TagSupport.
+        }
 
         sink.tableRow();
-        String suffix="";
-        if(att.attributeValue("use","optional").equals("required"))
-            suffix+=" (required)";
-        if(att.attributeValue("deprecated","false").equals("true"))
-            suffix+=" (deprecated)";
-        tableCell(name +suffix);
+        String suffix = "";
+        if (att.attributeValue("use", "optional").equals("required")) {
+            suffix += " (required)";
+        }
+        if (att.attributeValue("deprecated", "false").equals("true")) {
+            suffix += " (deprecated)";
+        }
+        tableCell(name + suffix);
         tableCell(att.attributeValue("type"));
         docCell(att);
         sink.tableRow_();
@@ -224,5 +227,5 @@ public class ReferenceRenderer extends AbstractMavenReportRenderer {
         return w.toString();
     }
 
-    private static final Set<String> HIDDEN_ATTRIBUTES = new HashSet<>(Arrays.asList("escapeText","trim"));
+    private static final Set<String> HIDDEN_ATTRIBUTES = new HashSet<>(Arrays.asList("escapeText", "trim"));
 }
