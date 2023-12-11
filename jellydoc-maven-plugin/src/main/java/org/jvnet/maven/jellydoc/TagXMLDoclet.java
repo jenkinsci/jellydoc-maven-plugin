@@ -25,15 +25,6 @@ import com.sun.source.util.DocTrees;
 import com.sun.xml.txw2.TXW;
 import com.sun.xml.txw2.TypedXmlWriter;
 import com.sun.xml.txw2.output.StreamSerializer;
-import org.cyberneko.html.parsers.SAXParser;
-import org.jvnet.maven.jellydoc.annotation.NoContent;
-import org.jvnet.maven.jellydoc.annotation.Required;
-import org.jvnet.maven.jellydoc.annotation.TagLibUri;
-import org.xml.sax.Attributes;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
-
 import java.beans.Introspector;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -62,6 +53,14 @@ import javax.tools.Diagnostic;
 import jdk.javadoc.doclet.Doclet;
 import jdk.javadoc.doclet.DocletEnvironment;
 import jdk.javadoc.doclet.Reporter;
+import org.cyberneko.html.parsers.SAXParser;
+import org.jvnet.maven.jellydoc.annotation.NoContent;
+import org.jvnet.maven.jellydoc.annotation.Required;
+import org.jvnet.maven.jellydoc.annotation.TagLibUri;
+import org.xml.sax.Attributes;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
 
 /**
  * Main Doclet class to generate Tag Library ML.
@@ -81,14 +80,13 @@ public class TagXMLDoclet implements Doclet {
     private String targetFileName = null;
     private String encodingFormat;
 
-    private void main(DocletEnvironment root) throws Exception
-    {
+    private void main(DocletEnvironment root) throws Exception {
         File targetFile = new File(targetFileName);
         targetFile.getParentFile().mkdirs();
         FileOutputStream writer = new FileOutputStream(targetFileName);
-        Tags tw = TXW.create(Tags.class,new StreamSerializer(writer));
+        Tags tw = TXW.create(Tags.class, new StreamSerializer(writer));
 
-        javadocXML(root,tw);
+        javadocXML(root, tw);
         tw.commit();
     }
 
@@ -104,14 +102,13 @@ public class TagXMLDoclet implements Doclet {
 
     @Override
     public Set<? extends Option> getSupportedOptions() {
-        return Set.of(
-                new Option("-d", "target directory", "<dir>", 1) {
-                    @Override
-                    public boolean process(String opt, List<String> args) {
-                        targetFileName = args.get(0) + "/taglib.xml";
-                        return true;
-                    }
-                });
+        return Set.of(new Option("-d", "target directory", "<dir>", 1) {
+            @Override
+            public boolean process(String opt, List<String> args) {
+                targetFileName = args.get(0) + "/taglib.xml";
+                return true;
+            }
+        });
     }
 
     @Override
@@ -126,8 +123,9 @@ public class TagXMLDoclet implements Doclet {
         docTrees = root.getDocTrees();
 
         // Generate for packages.
-        for (PackageElement pkg : ElementFilter.packagesIn(root.getIncludedElements()))
-            packageXML(pkg,tw);
+        for (PackageElement pkg : ElementFilter.packagesIn(root.getIncludedElements())) {
+            packageXML(pkg, tw);
+        }
     }
 
     /**
@@ -135,7 +133,7 @@ public class TagXMLDoclet implements Doclet {
      */
     private void packageXML(PackageElement packageDoc, Tags tw) throws SAXException {
 
-        System.out.println( "processing package: " + packageDoc.getQualifiedName());
+        System.out.println("processing package: " + packageDoc.getQualifiedName());
 
         // lets see if we find a Tag
         boolean foundTag = false;
@@ -145,32 +143,34 @@ public class TagXMLDoclet implements Doclet {
                 break;
             }
         }
-        if (!foundTag)
+        if (!foundTag) {
             return;
+        }
 
         Library library = tw.library();
         library.name(packageDoc.getQualifiedName().toString());
 
         String name = packageDoc.getQualifiedName().toString();
         int idx = name.lastIndexOf('.');
-        if ( idx > 0 ) {
-            name = name.substring(idx+1);
+        if (idx > 0) {
+            name = name.substring(idx + 1);
         }
         library.prefix(name);
 
         String uri = findUri(packageDoc.getAnnotationMirrors());
-        if(uri==null)
+        if (uri == null) {
             uri = "jelly:" + name; // fallback
+        }
 
         library.uri(uri);
 
         // generate Doc element.
-        docXML(packageDoc,library);
+        docXML(packageDoc, library);
 
         // generate tags
         for (TypeElement c : ElementFilter.typesIn(packageDoc.getEnclosedElements())) {
             if (isTag(c) && !c.getModifiers().contains(Modifier.ABSTRACT)) {
-                tagXML(c,library.tag());
+                tagXML(c, library.tag());
             }
         }
     }
@@ -234,23 +234,23 @@ public class TagXMLDoclet implements Doclet {
     private void tagXML(TypeElement classDoc, org.jvnet.maven.jellydoc.Tag tag) throws SAXException {
         String name = classDoc.getSimpleName().toString();
         tag.className(name);
-        if ( name.endsWith( "Tag" ) ) {
-            name = name.substring(0, name.length() - 3 );
+        if (name.endsWith("Tag")) {
+            name = name.substring(0, name.length() - 3);
         }
         name = Introspector.decapitalize(name);
 
-
-        System.out.println( "processing tag: " + name);
+        System.out.println("processing tag: " + name);
 
         tag.name(name);
-        if(has(classDoc,NoContent.class))
+        if (has(classDoc, NoContent.class)) {
             tag.noContent(true);
+        }
 
         // generate "doc" sub-element
-        docXML(classDoc,tag);
+        docXML(classDoc, tag);
 
         // generate the attributes
-        propertiesXML(classDoc,tag);
+        propertiesXML(classDoc, tag);
     }
 
     /**
@@ -258,7 +258,7 @@ public class TagXMLDoclet implements Doclet {
      */
     private void propertiesXML(TypeElement classDoc, org.jvnet.maven.jellydoc.Tag tag) throws SAXException {
         for (ExecutableElement m : ElementFilter.methodsIn(classDoc.getEnclosedElements())) {
-            propertyXML(m,tag);
+            propertyXML(m, tag);
         }
         TypeMirror base = classDoc.getSuperclass();
         if (base instanceof DeclaredType) {
@@ -271,7 +271,6 @@ public class TagXMLDoclet implements Doclet {
         }
     }
 
-
     /**
      * Generates doc for a tag property
      */
@@ -281,11 +280,11 @@ public class TagXMLDoclet implements Doclet {
             return;
         }
         String name = methodDoc.getSimpleName().toString();
-        if ( ! name.startsWith( "set" ) ) {
+        if (!name.startsWith("set")) {
             return;
         }
         List<? extends VariableElement> parameterArray = methodDoc.getParameters();
-        if ( parameterArray == null || parameterArray.size() != 1 ) {
+        if (parameterArray == null || parameterArray.size() != 1) {
             return;
         }
         VariableElement parameter = parameterArray.get(0);
@@ -293,20 +292,21 @@ public class TagXMLDoclet implements Doclet {
         name = name.substring(3);
         name = Introspector.decapitalize(name);
 
-        if ( name.equals( "body") || name.equals( "context" ) || name.equals( "parent" ) ) {
+        if (name.equals("body") || name.equals("context") || name.equals("parent")) {
             return;
         }
 
         Attribute a = tag.attribute();
         a.name(name);
         a.type(parameter.asType().toString());
-        if(has(methodDoc, Required.class))
+        if (has(methodDoc, Required.class)) {
             a.use("required");
+        }
 
         // maybe do more semantics, like use custom tags to denote if its required, optional etc.
 
         // generate "doc" sub-element
-        docXML(methodDoc,a);
+        docXML(methodDoc, a);
     }
 
     /**
@@ -351,41 +351,39 @@ public class TagXMLDoclet implements Doclet {
 
     protected void parseHTML(String text, final TypedXmlWriter d) throws SAXException {
         SAXParser parser = new SAXParser();
-        parser.setProperty(
-            "http://cyberneko.org/html/properties/names/elems",
-            "lower"
-        );
-        parser.setProperty(
-            "http://cyberneko.org/html/properties/names/attrs",
-            "lower"
-        );
-        parser.setContentHandler(
-            new DefaultHandler() {
-                private Stack<TypedXmlWriter> w = new Stack<>();
-                { w.push(d); }
-                @Override
-                public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException {
-                    if ( validDocElementName( localName ) ) {
-                        w.push(w.peek()._element(localName,TypedXmlWriter.class));
-                    }
-                }
-                @Override
-                public void endElement(String namespaceURI, String localName, String qName) throws SAXException {
-                    if ( validDocElementName( localName ) ) {
-                        w.pop();
-                    }
-                }
-                @Override
-                public void characters(char[] ch, int start, int length) throws SAXException {
-                    w.peek()._pcdata(new String(ch,start,length));
+        parser.setProperty("http://cyberneko.org/html/properties/names/elems", "lower");
+        parser.setProperty("http://cyberneko.org/html/properties/names/attrs", "lower");
+        parser.setContentHandler(new DefaultHandler() {
+            private Stack<TypedXmlWriter> w = new Stack<>();
+
+            {
+                w.push(d);
+            }
+
+            @Override
+            public void startElement(String namespaceURI, String localName, String qName, Attributes atts)
+                    throws SAXException {
+                if (validDocElementName(localName)) {
+                    w.push(w.peek()._element(localName, TypedXmlWriter.class));
                 }
             }
-        );
+
+            @Override
+            public void endElement(String namespaceURI, String localName, String qName) throws SAXException {
+                if (validDocElementName(localName)) {
+                    w.pop();
+                }
+            }
+
+            @Override
+            public void characters(char[] ch, int start, int length) throws SAXException {
+                w.peek()._pcdata(new String(ch, start, length));
+            }
+        });
         try {
-            parser.parse( new InputSource(new StringReader( text )) );
-        }
-        catch (IOException e) {
-            System.err.println( "This should never happen!" + e );
+            parser.parse(new InputSource(new StringReader(text)));
+        } catch (IOException e) {
+            System.err.println("This should never happen!" + e);
         }
     }
 
@@ -393,7 +391,7 @@ public class TagXMLDoclet implements Doclet {
      * @return true if the given name is a valid HTML markup element.
      */
     protected boolean validDocElementName(String name) {
-        return ! name.equalsIgnoreCase( "html" ) && ! name.equalsIgnoreCase( "body" );
+        return !name.equalsIgnoreCase("html") && !name.equalsIgnoreCase("body");
     }
 
     /**
@@ -403,7 +401,7 @@ public class TagXMLDoclet implements Doclet {
         String name = tag.getTagName() + "tag";
         String text = tag.toString().substring(tag.getTagName().length() + 2);
         if (!text.isEmpty()) {
-            w._element(name,TypedXmlWriter.class)._pcdata(text);
+            w._element(name, TypedXmlWriter.class)._pcdata(text);
         }
     }
 

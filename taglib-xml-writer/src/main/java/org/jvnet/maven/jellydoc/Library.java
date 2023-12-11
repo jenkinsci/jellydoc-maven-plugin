@@ -24,8 +24,10 @@ import com.sun.xml.txw2.annotation.XmlElement;
 public interface Library extends Item {
     @XmlAttribute
     Library name(String name);
+
     @XmlAttribute
     Library prefix(String name);
+
     @XmlAttribute
     Library uri(String name);
 

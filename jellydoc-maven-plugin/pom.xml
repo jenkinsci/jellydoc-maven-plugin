@@ -7,39 +7,14 @@
     <version>${changelist}</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
+
   <artifactId>jellydoc-maven-plugin</artifactId>
   <packaging>maven-plugin</packaging>
-
   <name>Jellydoc Maven plugin</name>
 
-  <build>
-    <plugins>
-      <plugin>
-        <artifactId>maven-plugin-plugin</artifactId>
-        <version>${maven-plugin-tools.version}</version>
-        <configuration>
-          <goalPrefix>jellydoc</goalPrefix>
-        </configuration>
-      </plugin>
-      <plugin>
-        <artifactId>maven-enforcer-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>display-info</id>
-            <configuration>
-              <rules>
-                <requireUpperBoundDeps>
-                  <excludes combine.children="append">
-                    <exclude>org.slf4j:slf4j-api</exclude>
-                  </excludes>
-                </requireUpperBoundDeps>
-              </rules>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
+  <prerequisites>
+    <maven>${maven.version}</maven>
+  </prerequisites>
 
   <properties>
     <maven.version>3.8.1</maven.version>
@@ -48,10 +23,6 @@
     <!-- TODO fix violations -->
     <spotbugs.threshold>High</spotbugs.threshold>
   </properties>
-
-  <prerequisites>
-      <maven>${maven.version}</maven>
-  </prerequisites>
 
   <dependencyManagement>
     <dependencies>
@@ -110,14 +81,14 @@
       <version>2.0.0</version>
     </dependency>
     <dependency>
-      <groupId>net.sourceforge.nekohtml</groupId>
-      <artifactId>nekohtml</artifactId>
-      <version>1.9.22</version>
-    </dependency>
-    <dependency>
       <groupId>net.java.dev.textile-j</groupId>
       <artifactId>textile-j</artifactId>
       <version>2.2.864</version>
+    </dependency>
+    <dependency>
+      <groupId>net.sourceforge.nekohtml</groupId>
+      <artifactId>nekohtml</artifactId>
+      <version>1.9.22</version>
     </dependency>
     <dependency>
       <groupId>org.apache.ant</groupId>
@@ -178,6 +149,35 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-plugin-plugin</artifactId>
+        <version>${maven-plugin-tools.version}</version>
+        <configuration>
+          <goalPrefix>jellydoc</goalPrefix>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>display-info</id>
+            <configuration>
+              <rules>
+                <requireUpperBoundDeps>
+                  <excludes combine.children="append">
+                    <exclude>org.slf4j:slf4j-api</exclude>
+                  </excludes>
+                </requireUpperBoundDeps>
+              </rules>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 
   <reporting>
     <plugins>

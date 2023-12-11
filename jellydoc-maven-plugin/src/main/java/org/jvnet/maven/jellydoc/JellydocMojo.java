@@ -15,6 +15,18 @@
  */
 package org.jvnet.maven.jellydoc;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Collection;
+import java.util.List;
+import java.util.Locale;
+import javax.xml.transform.Templates;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.artifact.factory.ArtifactFactory;
 import org.apache.maven.doxia.sink.Sink;
@@ -44,22 +56,9 @@ import org.codehaus.plexus.util.FileUtils;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.Node;
-import org.dom4j.tree.DefaultDocument;
 import org.dom4j.io.DocumentSource;
 import org.dom4j.io.SAXReader;
-
-import javax.xml.transform.Templates;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.stream.StreamResult;
-import javax.xml.transform.stream.StreamSource;
-import java.io.File;
-import java.io.IOException;
-import java.io.FileOutputStream;
-import java.io.FileNotFoundException;
-import java.util.Collection;
-import java.util.List;
-import java.util.Locale;
+import org.dom4j.tree.DefaultDocument;
 
 /**
  * Generates jellydoc XML and other artifacts from there.
@@ -117,7 +116,7 @@ public class JellydocMojo extends AbstractMojo implements MavenMultiPageReport {
         DefaultLogger logger = new DefaultLogger();
         logger.setErrorPrintStream(System.err);
         logger.setOutputPrintStream(System.out);
-        logger.setMessageOutputLevel( getLog().isDebugEnabled() ? Project.MSG_DEBUG : Project.MSG_INFO );
+        logger.setMessageOutputLevel(getLog().isDebugEnabled() ? Project.MSG_DEBUG : Project.MSG_INFO);
         p.addBuildListener(logger);
 
         Javadoc javadoc = new Javadoc();
@@ -141,7 +140,7 @@ public class JellydocMojo extends AbstractMojo implements MavenMultiPageReport {
             return;
         }
 
-        javadoc.setClasspath(makePath(p,project.getArtifacts()));
+        javadoc.setClasspath(makePath(p, project.getArtifacts()));
 
         Javadoc.DocletInfo d = javadoc.createDoclet();
         d.setProject(p);
@@ -150,16 +149,18 @@ public class JellydocMojo extends AbstractMojo implements MavenMultiPageReport {
 
         Path docletPath = makePath(p, pluginArtifacts);
         try {
-            Artifact self = factory.createArtifact("io.jenkins.tools.maven", "jellydoc-maven-plugin", pluginVersion, null, "maven-plugin");
-            self = resolver.resolveArtifact(session.getProjectBuildingRequest(), self).getArtifact();
+            Artifact self = factory.createArtifact(
+                    "io.jenkins.tools.maven", "jellydoc-maven-plugin", pluginVersion, null, "maven-plugin");
+            self = resolver.resolveArtifact(session.getProjectBuildingRequest(), self)
+                    .getArtifact();
             docletPath.createPathElement().setLocation(self.getFile());
         } catch (ArtifactResolverException e) {
-            throw new MojoExecutionException("Failed to resolve plugin from within itself",e);
+            throw new MojoExecutionException("Failed to resolve plugin from within itself", e);
         }
         d.setPath(docletPath);
 
         // debug support
-//        javadoc.createArg().setLine("-J-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:8000");
+        //        javadoc.createArg().setLine("-J-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:8000");
 
         javadoc.execute();
 
@@ -170,38 +171,40 @@ public class JellydocMojo extends AbstractMojo implements MavenMultiPageReport {
         try {
             getLog().info("Generating XML Schema");
             TransformerFactory tf = TransformerFactory.newInstance();
-            Templates templates = tf.newTemplates(new StreamSource(JellydocMojo.class.getResource("xsdgen.xsl").toExternalForm()));
+            Templates templates = tf.newTemplates(new StreamSource(
+                    JellydocMojo.class.getResource("xsdgen.xsl").toExternalForm()));
             File source = new File(project.getBasedir(), "target/taglib.xml");
-            for(Node node : new SAXReader().read(source).selectNodes("/tags/library")) {
+            for (Node node : new SAXReader().read(source).selectNodes("/tags/library")) {
                 Element lib = (Element) node;
                 String prefix = lib.attributeValue("prefix");
 
-                File schema = new File(project.getBasedir(), "target/taglib-"+prefix+".xsd");
+                File schema = new File(project.getBasedir(), "target/taglib-" + prefix + ".xsd");
 
                 lib.getParent().remove(lib); // make it on its own
                 DefaultDocument newDoc = new DefaultDocument();
                 newDoc.setRootElement(lib);
 
-                templates.newTransformer().transform(
-                    new DocumentSource(newDoc),
-                    new StreamResult(new FileOutputStream(schema)));
+                templates
+                        .newTransformer()
+                        .transform(new DocumentSource(newDoc), new StreamResult(new FileOutputStream(schema)));
 
-                helper.attachArtifact(project,"xsd","taglib-"+prefix,schema);
+                helper.attachArtifact(project, "xsd", "taglib-" + prefix, schema);
             }
         } catch (TransformerException | FileNotFoundException | DocumentException e) {
-            throw new MojoExecutionException("Failed to generate schema",e);
+            throw new MojoExecutionException("Failed to generate schema", e);
         }
     }
 
     private Path makePath(Project p, Collection<Artifact> artifacts) {
         Path docletPath = new Path(p);
-        for (Artifact artifact : artifacts)
+        for (Artifact artifact : artifacts) {
             docletPath.createPathElement().setLocation(artifact.getFile());
+        }
         return docletPath;
     }
 
     private File targetDir() {
-        return new File(project.getBasedir(),"target");
+        return new File(project.getBasedir(), "target");
     }
 
     private void setParam(Javadoc.DocletInfo d, String name, String value) {
@@ -210,12 +213,12 @@ public class JellydocMojo extends AbstractMojo implements MavenMultiPageReport {
         dp.setValue(value);
     }
 
-//    private Path makePath(Project p, List list) {
-//        Path src = new Path(p);
-//        for (Object dir : list)
-//            src.createPathElement().setLocation(new File(dir.toString()));
-//        return src;
-//    }
+    //    private Path makePath(Project p, List list) {
+    //        Path src = new Path(p);
+    //        for (Object dir : list)
+    //            src.createPathElement().setLocation(new File(dir.toString()));
+    //        return src;
+    //    }
 
     /**
      * Generate a report.
@@ -262,7 +265,7 @@ public class JellydocMojo extends AbstractMojo implements MavenMultiPageReport {
                 FileUtils.copyDirectory(targetDir(), new File(targetDir(), "site"), "taglib-*.xsd", null);
             }
         } catch (AbstractMojoExecutionException | DocumentException | IOException e) {
-            throw new MavenReportException("Failed to generate report",e);
+            throw new MavenReportException("Failed to generate report", e);
         }
     }
 
