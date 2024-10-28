@@ -27,6 +27,7 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
+import org.apache.maven.RepositoryUtils;
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.artifact.factory.ArtifactFactory;
 import org.apache.maven.doxia.sink.Sink;
@@ -41,12 +42,12 @@ import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.plugins.annotations.ResolutionScope;
+import org.apache.maven.project.DefaultProjectBuildingRequest;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.project.MavenProjectHelper;
+import org.apache.maven.project.ProjectBuildingRequest;
 import org.apache.maven.reporting.MavenMultiPageReport;
 import org.apache.maven.reporting.MavenReportException;
-import org.apache.maven.shared.transfer.artifact.resolve.ArtifactResolver;
-import org.apache.maven.shared.transfer.artifact.resolve.ArtifactResolverException;
 import org.apache.tools.ant.DefaultLogger;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.taskdefs.Javadoc;
@@ -59,6 +60,10 @@ import org.dom4j.Node;
 import org.dom4j.io.DocumentSource;
 import org.dom4j.io.SAXReader;
 import org.dom4j.tree.DefaultDocument;
+import org.eclipse.aether.RepositorySystem;
+import org.eclipse.aether.repository.RemoteRepository;
+import org.eclipse.aether.resolution.ArtifactRequest;
+import org.eclipse.aether.resolution.ArtifactResolutionException;
 
 /**
  * Generates jellydoc XML and other artifacts from there.
@@ -102,7 +107,7 @@ public class JellydocMojo extends AbstractMojo implements MavenMultiPageReport {
      * Used for resolving artifacts
      */
     @Component
-    public ArtifactResolver resolver;
+    public RepositorySystem repositorySystem;
 
     @Component
     public MavenProjectHelper helper;
@@ -148,15 +153,23 @@ public class JellydocMojo extends AbstractMojo implements MavenMultiPageReport {
         setParam(d, "-d", targetDir().getAbsolutePath());
 
         Path docletPath = makePath(p, pluginArtifacts);
+
+        ProjectBuildingRequest buildingRequest = new DefaultProjectBuildingRequest(session.getProjectBuildingRequest());
+        buildingRequest.setRemoteRepositories(project.getRemoteArtifactRepositories());
+        List<RemoteRepository> remoteRepositories = RepositoryUtils.toRepos(buildingRequest.getRemoteRepositories());
+
+        Artifact artifact = factory.createArtifact(
+                "io.jenkins.tools.maven", "jellydoc-maven-plugin", pluginVersion, null, "maven-plugin");
+        ArtifactRequest request = new ArtifactRequest(RepositoryUtils.toArtifact(artifact), remoteRepositories, null);
+        Artifact self;
         try {
-            Artifact self = factory.createArtifact(
-                    "io.jenkins.tools.maven", "jellydoc-maven-plugin", pluginVersion, null, "maven-plugin");
-            self = resolver.resolveArtifact(session.getProjectBuildingRequest(), self)
-                    .getArtifact();
-            docletPath.createPathElement().setLocation(self.getFile());
-        } catch (ArtifactResolverException e) {
+            self = RepositoryUtils.toArtifact(repositorySystem
+                    .resolveArtifact(buildingRequest.getRepositorySession(), request)
+                    .getArtifact());
+        } catch (ArtifactResolutionException e) {
             throw new MojoExecutionException("Failed to resolve plugin from within itself", e);
         }
+        docletPath.createPathElement().setLocation(self.getFile());
         d.setPath(docletPath);
 
         // debug support
