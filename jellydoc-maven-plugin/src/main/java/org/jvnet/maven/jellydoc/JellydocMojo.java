@@ -160,7 +160,7 @@ public class JellydocMojo extends AbstractMojo implements MavenMultiPageReport {
 
         Artifact artifact = factory.createArtifact(
                 "io.jenkins.tools.maven", "jellydoc-maven-plugin", pluginVersion, null, "maven-plugin");
-        ArtifactRequest request = new ArtifactRequest(RepositoryUtils.toArtifact(artifact), remoteRepositories, "");
+        ArtifactRequest request = new ArtifactRequest(RepositoryUtils.toArtifact(artifact), remoteRepositories, null);
         Artifact self;
         try {
             self = RepositoryUtils.toArtifact(repositorySystem
