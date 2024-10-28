@@ -155,6 +155,7 @@ public class JellydocMojo extends AbstractMojo implements MavenMultiPageReport {
         Path docletPath = makePath(p, pluginArtifacts);
 
         ProjectBuildingRequest buildingRequest = new DefaultProjectBuildingRequest(session.getProjectBuildingRequest());
+        buildingRequest.setRemoteRepositories(project.getRemoteArtifactRepositories());
         List<RemoteRepository> remoteRepositories = RepositoryUtils.toRepos(buildingRequest.getRemoteRepositories());
 
         Artifact artifact = factory.createArtifact(
