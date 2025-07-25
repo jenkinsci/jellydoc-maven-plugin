@@ -107,7 +107,7 @@ public class ReferenceRenderer extends AbstractMavenReportRenderer {
             sink.tableRow();
             sink.tableCell();
             String name = tag.attributeValue("name");
-            sink.rawText("<a href='#" + prefix + ':' + name + "'>" + name + "</a>");
+            sink.rawText("<a href='#" + prefix + ".3A" + name + "'>" + name + "</a>");
             sink.tableCell_();
             docCell(tag);
             sink.tableRow_();
