@@ -18,7 +18,7 @@
 
   <properties>
     <maven.version>3.9.6</maven.version>
-    <plexus.version>2.1.1</plexus.version>
+    <plexus.version>2.2.0</plexus.version>
     <maven-plugin-tools.version>3.15.2</maven-plugin-tools.version>
     <!-- TODO fix violations -->
     <spotbugs.threshold>High</spotbugs.threshold>
